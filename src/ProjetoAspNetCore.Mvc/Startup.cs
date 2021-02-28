@@ -1,3 +1,6 @@
+using KissLog.AspNetCore;
+using KissLog.CloudListeners.Auth;
+using KissLog.CloudListeners.RequestLogsListener;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +13,8 @@ using ProjetoAspNetCore.Mvc.Extensions.Identity;
 using ProjetoAspNetCore.Mvc.Extensions.Identity.Services;
 using ProjetoAspNetCore.Mvc.Identity.Services;
 using System;
+using System.Diagnostics;
+using System.Text;
 
 namespace ProjetoAspNetCore.Mvc
 {
@@ -64,6 +69,11 @@ namespace ProjetoAspNetCore.Mvc
             };
             #endregion
 
+            app.UseKissLogMiddleware(opt =>
+            {
+                ConfigureKissLog(opt);
+            });
+
             DefaultUsersAndRoles.Seed(context, userManager, roleManager).Wait();
 
             #region Rotas
@@ -76,6 +86,46 @@ namespace ProjetoAspNetCore.Mvc
             });
             #endregion
 
+        }
+
+        private void ConfigureKissLog(IOptionsBuilder options)
+        {
+            // optional KissLog configuration
+            options.Options
+                .AppendExceptionDetails((Exception ex) =>
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    if (ex is System.NullReferenceException nullRefException)
+                    {
+                        sb.AppendLine("Important: check for null references");
+                    }
+
+                    return sb.ToString();
+                });
+
+            // KissLog internal logs
+            options.InternalLog = (message) =>
+            {
+                Debug.WriteLine(message);
+            };
+
+            // register logs output
+            RegisterKissLogListeners(options);
+        }
+
+        private void RegisterKissLogListeners(IOptionsBuilder options)
+        {
+            // multiple listeners can be registered using options.Listeners.Add() method
+
+            // register KissLog.net cloud listener
+            options.Listeners.Add(new RequestLogsApiListener(new Application(
+                Configuration["KissLog.OrganizationId"],    //  "02b96cb3-576a-469c-b6b8-f66ba8b86f82"
+                Configuration["KissLog.ApplicationId"])     //  "2f5cb2a0-b27d-4a0f-bf5f-592448b442a5"
+            )
+            {
+                ApiUrl = Configuration["KissLog.ApiUrl"]    //  "https://api.kisslog.net"
+            });
         }
     }
 }
