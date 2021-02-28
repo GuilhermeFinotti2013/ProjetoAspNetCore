@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ProjetoAspNetCore.Domain.Models.EstadoPaciente>
+
+@{
+    ViewData["Title"] = "Lista de estados de paciente";
+}
+
+<vc:cabecalho titulo="SysMed - Controle hospitalar simples" subtitulo="Módulo Estado do paciente"></vc:cabecalho>
+
+<partial name="PartialViews/_estado_paciente" />
+
+<div class="panel panel-default panel-controls">
+    <div class="panel panel-heading">
+        <h3>Lista de estados de pacientes</h3>
+    </div>
+    <div class="panel panel-body">
+        <p>
+            <a asp-controller="EstadoPaciente" asp-action="Create" class="btn btn-info"><span class="fa fa-plus"></span> Novo paciente</a>
+        </p>
+        <listar-dados Items="@Model"></listar-dados>
+    </div>
+</div>
+

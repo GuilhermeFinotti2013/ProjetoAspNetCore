@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ProjetoAspNetCore.Domain.Models.Paciente>
+@using ProjetoAspNetCore.Mvc.Extensions.ExtensionsMethods 
+
+@{
+    ViewData["Title"] = "Lista de pacientes";
+}
+
+<vc:cabecalho titulo="SysMed - Controle hospitalar simples" subtitulo="Módulo de paciente"></vc:cabecalho>
+
+<partial name="PartialViews/_estado_paciente" />
+
+<div class="panel panel-default panel-controls">
+    <div class="panel panel-heading">
+        <h3>Lista de pacientes</h3>
+    </div>
+    <div class="panel panel-body">
+        <p>
+            <a asp-controller="Paciente" asp-action="Create" class="btn btn-info"><span class="fa fa-plus"></span> Novo paciente</a>
+        </p>
+
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataNascimento)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataInternacao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TipoPaciente)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Sexo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EstadoPaciente.Descricao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ativo)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    string dtNascFormatado = item.DataNascimento.ToBrazilianDate();
+                    string dtHoraInternacao = item.DataInternacao.ToBrazilianDateTime();
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @dtNascFormatado
+                        </td>
+                        <td>
+                            @dtHoraInternacao
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoPaciente)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sexo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EstadoPaciente.Descricao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ativo)
+                        </td>
+                        <td>
+                            <a title="Editar" asp-controller="Paciente" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pencil-square fa-2x"></span></a>
+                            <a title="Visualizar" asp-controller="Paciente" asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-search fa-2x"></span></a>
+                            <a title="Deletar" asp-controller="Paciente" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash fa-2x"></span></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

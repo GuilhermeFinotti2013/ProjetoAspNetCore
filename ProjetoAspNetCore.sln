@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Apresentacao", "1.Apresentacao", "{0BBF381F-5EA1-4C51-A3AF-DB2BCA48CB4D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Aplicacao", "2.Aplicacao", "{1868C829-62FD-46DD-8C83-5D089B3899F3}"
+	ProjectSection(SolutionItems) = preProject
+		src\ProjetoAspNetCore.Mvc\bundleconfig.json = src\ProjetoAspNetCore.Mvc\bundleconfig.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Dominio", "3.Dominio", "{B8CCA2DB-0B81-4AAF-9D17-6B306EB0EC9B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Infra", "4.Infra", "{13B49094-7C26-4075-ADD8-EECD8E5DB6CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1.Data", "4.1.Data", "{14C0D774-636C-4F28-AC21-63B6E1294499}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoAspNetCore.Domain", "src\ProjetoAspNetCore.Domain\ProjetoAspNetCore.Domain.csproj", "{ACFD774D-E727-4113-AA7D-54D14944A1FE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoAspNetCore.Data", "src\ProjetoAspNetCore.Data\ProjetoAspNetCore.Data.csproj", "{760A5F11-3E8E-4694-9BF1-0FC5DACEC7AD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoAspNetCore.Mvc", "src\ProjetoAspNetCore.Mvc\ProjetoAspNetCore.Mvc.csproj", "{EEC90CF1-15A2-49D1-829A-D26E37CD7E44}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoAspNetCore.DomainCore", "src\ProjetoAspNetCore.DomainCore\ProjetoAspNetCore.DomainCore.csproj", "{B8BF3693-B4E1-4158-AF52-ACB60E6FF830}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACFD774D-E727-4113-AA7D-54D14944A1FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACFD774D-E727-4113-AA7D-54D14944A1FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACFD774D-E727-4113-AA7D-54D14944A1FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACFD774D-E727-4113-AA7D-54D14944A1FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{760A5F11-3E8E-4694-9BF1-0FC5DACEC7AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{760A5F11-3E8E-4694-9BF1-0FC5DACEC7AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{760A5F11-3E8E-4694-9BF1-0FC5DACEC7AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{760A5F11-3E8E-4694-9BF1-0FC5DACEC7AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEC90CF1-15A2-49D1-829A-D26E37CD7E44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC90CF1-15A2-49D1-829A-D26E37CD7E44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC90CF1-15A2-49D1-829A-D26E37CD7E44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEC90CF1-15A2-49D1-829A-D26E37CD7E44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8BF3693-B4E1-4158-AF52-ACB60E6FF830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8BF3693-B4E1-4158-AF52-ACB60E6FF830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8BF3693-B4E1-4158-AF52-ACB60E6FF830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8BF3693-B4E1-4158-AF52-ACB60E6FF830}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{14C0D774-636C-4F28-AC21-63B6E1294499} = {13B49094-7C26-4075-ADD8-EECD8E5DB6CA}
+		{ACFD774D-E727-4113-AA7D-54D14944A1FE} = {B8CCA2DB-0B81-4AAF-9D17-6B306EB0EC9B}
+		{760A5F11-3E8E-4694-9BF1-0FC5DACEC7AD} = {14C0D774-636C-4F28-AC21-63B6E1294499}
+		{EEC90CF1-15A2-49D1-829A-D26E37CD7E44} = {0BBF381F-5EA1-4C51-A3AF-DB2BCA48CB4D}
+		{B8BF3693-B4E1-4158-AF52-ACB60E6FF830} = {B8CCA2DB-0B81-4AAF-9D17-6B306EB0EC9B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0FA92D55-F43D-437C-A2D3-B4D08FC7D0CF}
+	EndGlobalSection
+EndGlobal

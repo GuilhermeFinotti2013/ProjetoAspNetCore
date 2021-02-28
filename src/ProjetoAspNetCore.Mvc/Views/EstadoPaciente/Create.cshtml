@@ -1,0 +1,26 @@
+﻿@model ProjetoAspNetCore.Domain.Models.EstadoPaciente
+
+@{
+    ViewData["Title"] = "Novo estado de paciente";
+}
+
+<vc:cabecalho titulo="SysMed - Controle hospitalar simples" subtitulo="Módulo Estado do paciente"></vc:cabecalho>
+
+<div class="panel panel-default panel-controls">
+    <div class="panel panel-heading">
+        <h3>Adicionar novo estado de paciente</h3>
+    </div>
+    <div class="panel panel-body">
+        <form asp-action="Create">
+            <div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="_criar_editar" />
+                <br />
+            </div>
+            <div>
+                <input type="submit" value="Adicionar estado de paciente" class="btn btn-success" />
+                <a asp-controller="EstadoPaciente" asp-action="Index" class="btn btn-default">Voltar à lista</a>
+            </div>
+        </form>
+    </div>
+</div>
