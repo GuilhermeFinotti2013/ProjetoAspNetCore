@@ -1,0 +1,36 @@
+﻿@model ProjetoAspNetCore.Mvc.ViewModel.ContatoViewModel 
+@{ ViewBag.Title = "Fale Conosco"; }
+
+<vc:cabecalho titulo="Fale Conosco" subtitulo="Contate-nos com suas sugestões, criticas e solicitações"></vc:cabecalho>
+
+<div class="panel panel-default panel-controls">
+    <div class="panel panel-heading">
+        <h3>Fale Conosco</h3>
+    </div>
+    <div class="panel panel-body">
+        <div class="col-md-4">
+            <form asp-controller="Home" asp-action="Contato" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Assunto"></label>
+                    <input asp-for="Assunto" class="form-control" />
+                    <span asp-validation-for="Assunto" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mensagem"></label>
+                    <input asp-for="Mensagem" class="form-control" />
+                    <span asp-validation-for="Mensagem" class="text-danger"></span>
+                </div>
+                <div>
+                    <input type="submit" value="Voltar" class="btn btn-success" />
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-default">Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

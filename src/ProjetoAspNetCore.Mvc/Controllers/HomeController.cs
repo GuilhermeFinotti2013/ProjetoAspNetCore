@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProjetoAspNetCore.Mvc.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,6 +28,19 @@ namespace ProjetoAspNetCore.Mvc.Controllers
             return View();
         }
 
+        [HttpGet("fale-conosco")]
+        public IActionResult Contato()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("fale-conosco")]
+        public IActionResult Contato(ContatoViewModel model)
+        {
+            return View();
+        }
+    
         public IActionResult BoxInit()
         {
             return View();

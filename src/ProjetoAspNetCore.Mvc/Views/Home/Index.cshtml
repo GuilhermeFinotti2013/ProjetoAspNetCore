@@ -41,7 +41,7 @@
         <div class="animated fadeInDownBig">
             <div class="panel panel-primary toggle mt20">
                 <div class="panel-heading">
-                    
+
                 </div>
                 <div class="panel-body">
                     <div style="padding: 25px; margin: 25px; vertical-align: central">
@@ -61,30 +61,41 @@
                                         <div class="row text-md-center text-sm-center text-xs-center">
                                             <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
                                                 <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <img src="/images/dashboard.png" class="card-img-top" style="width: 100%; height: auto" />
-                                                    <div class="card-img-overlay">
-                                                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                                                        {
+                                                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                                                    {
+                                                        <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
+                                                            <img src="/images/dashboard.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                        </a>
+                                                        <div class="card-img-overlay">
+
                                                             <div style="text-align: center">
                                                                 <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
                                                                     <h4 class="card-title">.:: Entrar-Admin ::.</h4>
                                                                 </a>
                                                             </div>
-                                                        }
-                                                        else
-                                                        {
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a asp-controller="Home" asp-action="BoxInit" style="text-decoration: none; color: #ed5353; font-size: 16px;">
+                                                            <img src="/images/dashboard.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                        </a>
+                                                        <div class="card-img-overlay">
+
                                                             <div style="text-align: center">
                                                                 <a asp-controller="Home" asp-action="BoxInit" style="text-decoration: none; color: #ed5353; font-size: 16px;">
                                                                     <h4 class="card-title">.:: Entrar-Comum ::.</h4>
                                                                 </a>
                                                             </div>
-                                                        }
-                                                    </div>
+                                                        </div>
+                                                    }
                                                 </div>
                                             </div>
                                             <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
                                                 <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <img src="/images/atualizacao_cadastral.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
+                                                        <img src="/images/atualizacao_cadastral.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    </a>
                                                     <div class="card-img-overlay">
                                                         <div style="text-align: center">
                                                             <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
@@ -96,7 +107,9 @@
                                             </div>
                                             <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
                                                 <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <img src="/images/calendar.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
+                                                        <img src="/images/calendar.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    </a>
                                                     <div class="card-img-overlay">
                                                         <div style="text-align: center">
                                                             <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
@@ -108,7 +121,9 @@
                                             </div>
                                             <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
                                                 <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <img src="/images/examesdeimagens.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
+                                                        <img src="/images/examesdeimagens.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    </a>
                                                     <div class="card-img-overlay">
                                                         <div style="text-align: center">
                                                             <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
@@ -122,7 +137,9 @@
                                         <div class="row text-center">
                                             <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
                                                 <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <img src="/images/evolucao.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
+                                                        <img src="/images/evolucao.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    </a>
                                                     <div class="card-img-overlay">
                                                         <div style="text-align: center">
                                                             <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
@@ -134,7 +151,9 @@
                                             </div>
                                             <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
                                                 <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <img src="/images/prescricao.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
+                                                        <img src="/images/prescricao.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    </a>
                                                     <div class="card-img-overlay">
                                                         <div style="text-align: center">
                                                             <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
@@ -146,7 +165,9 @@
                                             </div>
                                             <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
                                                 <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <img src="/images/sinais_vitais.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
+                                                        <img src="/images/sinais_vitais.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    </a>
                                                     <div class="card-img-overlay">
                                                         <div style="text-align: center">
                                                             <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
@@ -158,7 +179,9 @@
                                             </div>
                                             <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
                                                 <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <img src="/images/mural.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
+                                                        <img src="/images/mural.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    </a>
                                                     <div class="card-img-overlay">
                                                         <div style="text-align: center">
                                                             <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
@@ -173,7 +196,9 @@
                                         <div class="row text-center">
                                             <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
                                                 <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <img src="/images/interacao_medicamentosa.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
+                                                        <img src="/images/interacao_medicamentosa.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    </a>
                                                     <div class="card-img-overlay">
                                                         <div style="text-align: center">
                                                             <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
@@ -185,7 +210,9 @@
                                             </div>
                                             <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
                                                 <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <img src="/images/niveldeacesso.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
+                                                        <img src="/images/niveldeacesso.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    </a>
                                                     <div class="card-img-overlay">
                                                         <div style="text-align: center">
                                                             <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
@@ -197,7 +224,9 @@
                                             </div>
                                             <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
                                                 <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <img src="/images/users.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
+                                                        <img src="/images/users.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    </a>
                                                     <div class="card-img-overlay">
                                                         <div style="text-align: center">
                                                             <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
@@ -209,7 +238,9 @@
                                             </div>
                                             <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
                                                 <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <img src="/images/config.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
+                                                        <img src="/images/config.png" class="card-img-top" style="width: 100%; height: auto" />
+                                                    </a>
                                                     <div class="card-img-overlay">
                                                         <div style="text-align: center">
                                                             <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
@@ -220,13 +251,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
-
-
-
-
-
                                     </div>
                                 </div>
                             </div>
