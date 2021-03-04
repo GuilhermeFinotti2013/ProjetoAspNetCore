@@ -15,7 +15,7 @@ namespace ProjetoAspNetCore.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0")
+                .HasAnnotation("ProductVersion", "3.1.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -34,6 +34,23 @@ namespace ProjetoAspNetCore.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EstadoPaciente");
+                });
+
+            modelBuilder.Entity("ProjetoAspNetCore.Domain.Models.Generico", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Codigo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("varchar(90)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Generico");
                 });
 
             modelBuilder.Entity("ProjetoAspNetCore.Domain.Models.Paciente", b =>

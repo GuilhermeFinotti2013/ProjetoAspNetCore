@@ -74,7 +74,9 @@ namespace ProjetoAspNetCore.Mvc
                 ConfigureKissLog(opt);
             });
 
-            DefaultUsersAndRoles.Seed(context, userManager, roleManager).Wait();
+            //CriaUsersAndRoles.Seed(context, userManager, roleManager).Wait();
+            //app.UseMiddleware<DefaultUsersAndRolesMiddleware>();
+            //app.UseAddUsersAndRoles();
 
             #region Rotas
             app.UseEndpoints(endpoints =>
