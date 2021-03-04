@@ -19,6 +19,33 @@ namespace ProjetoAspNetCore.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ProjetoAspNetCore.Domain.Models.Cid", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CidInternalId")
+                        .HasColumnName("CidInternalId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasColumnName("Codigo")
+                        .HasColumnType("varchar(6)")
+                        .HasMaxLength(6);
+
+                    b.Property<string>("Diagnostico")
+                        .IsRequired()
+                        .HasColumnName("Diagnostico")
+                        .HasColumnType("nvarchar(4000)")
+                        .HasMaxLength(4000);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cid");
+                });
+
             modelBuilder.Entity("ProjetoAspNetCore.Domain.Models.EstadoPaciente", b =>
                 {
                     b.Property<Guid>("Id")

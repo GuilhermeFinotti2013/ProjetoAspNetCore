@@ -19,8 +19,9 @@ namespace ProjetoAspNetCore.Mvc.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.AddDefaultUserAndRole();
-            builder.AddGenericos();
+            //    builder.AddDefaultUserAndRole();
+            //  builder.AddGenericos();
+            builder.AddCid();
             base.OnModelCreating(builder);
         }
     }

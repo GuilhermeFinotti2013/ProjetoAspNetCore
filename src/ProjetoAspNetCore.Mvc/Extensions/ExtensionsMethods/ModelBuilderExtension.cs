@@ -95,5 +95,38 @@ namespace ProjetoAspNetCore.Mvc.Extensions.ExtensionsMethods
 
             return builder;
         }
+        public static ModelBuilder AddCid(this ModelBuilder builder)
+        {
+            var k = 0;
+            string linha;
+
+            var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
+            var csvPath = Path.Combine(outPutDirectory, "Csv\\Cid.CSV");
+            string filePath = new Uri(csvPath).LocalPath;
+
+            using (var fs = File.OpenRead(filePath))
+            {
+                using (var reader = new StreamReader(fs))
+                {
+                    while ((linha = reader.ReadLine()) != null)
+                    {
+                        if (k > 0)
+                        {
+                            var partes = linha.Split(';');
+                            builder.Entity<Cid>().HasData(
+                                new Cid
+                                {
+                                    CidInternalId = Convert.ToInt32(partes[0]),
+                                    Codigo = partes[1],
+                                    Diagnostico = partes[2]
+                                });
+                        }
+                        k++;
+                    }
+                }
+            }
+
+            return builder;
+        }
     }
 }

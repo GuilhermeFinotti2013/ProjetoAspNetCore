@@ -19,6 +19,7 @@ namespace ProjetoAspNetCore.Data.ORM
         public DbSet<Paciente> Paciente { get; set; }
         public DbSet<EstadoPaciente> EstadoPaciente { get; set; }
         public DbSet<Generico> Generico { get; set; }
+        public DbSet<Cid> Cid { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
