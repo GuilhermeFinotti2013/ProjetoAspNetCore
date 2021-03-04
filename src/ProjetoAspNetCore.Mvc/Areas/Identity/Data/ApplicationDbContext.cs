@@ -21,7 +21,7 @@ namespace ProjetoAspNetCore.Mvc.Data
         {
             //    builder.AddDefaultUserAndRole();
             //  builder.AddGenericos();
-            builder.AddCid();
+           // builder.AddCid();
             base.OnModelCreating(builder);
         }
     }
