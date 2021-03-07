@@ -4,13 +4,15 @@
     ViewData["Title"] = "Genéricos";
 }
 
+<vc:cabecalho titulo="SysMed - Controle hospitalar simples" subtitulo="Cadastro de Genéricos"></vc:cabecalho>
+
 <div class="row" style="margin-top: 12px;">
     <div class="col-lg-12">
         <p>
             <button class="btn btn-default create" data-toggle="tooltip" data-placement="bottom" title="Adicionar um novo tipo de genérico" data-original-title="Adicionar um novo genérico">
                 <i class="glyphicon glyphicon-plus-sign"></i>
             </button>
-            <a asp-controller="Home" asp-action="Index" class="btn btn-default">Home</a>
+            <a asp-controller="Home" asp-action="Dashboard" class="btn btn-default">Home</a>
         </p>
 
         <div class="animated fadeInRightBig">
@@ -20,42 +22,7 @@
                     <h4 class="panel-title"><i class="fa fa-magic"></i> MédicalSystem - Cadastro de Genéricos</h4>
                 </div>
                 <div class="panel-body">
-                    <table id="myTable" class="table table-striped table-bordered table-hover" style="width:100%" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Descrição</th>
-                                <th class="text-center">Ação</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Codigo)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Nome)
-                                    </td>
-
-                                    <td class="text-center">
-                                        <button class="btn btn-default details" data-id="@item.Id" data-toggle="tooltip" data-placement="bottom" title="Detalhes de Genérico" data-original-title="Detalhes de Genérico"><i class="glyphicon glyphicon-file"></i></button>
-                                        <button class="btn btn-primary edit" data-id="@item.Id" data-toggle="tooltip" data-placement="bottom" title="Editar Genérico" data-original-title="Editar Genérico"><i class="glyphicon glyphicon-edit"></i></button>
-                                        <button class="btn btn-danger delete" data-id="@item.Id" data-toggle="tooltip" data-placement="bottom" title="Excluir Genérico" data-original-title="Excluir Genérico"><i class="glyphicon glyphicon-trash"></i></button>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Código</th>
-                                <th>Descrição</th>
-                                <th class="text-center">Ação</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+                    <listar-dados Items="@Model"></listar-dados>
                 </div>
             </div>
         </div>

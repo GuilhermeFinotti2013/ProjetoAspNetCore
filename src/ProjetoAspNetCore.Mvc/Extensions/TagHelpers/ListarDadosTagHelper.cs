@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
 {
@@ -15,12 +16,18 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.TagName = "table";
-            output.Attributes.Add("class", "table table-bordered table-hover");
+            output.Attributes.Add("id", "myTable");
+            output.Attributes.Add("class", "table table-striped table-bordered table-hover");
+            output.Attributes.Add("style", "width:100%");
+            output.Attributes.Add("cellspacing", "0");
+            output.Attributes.Add("width", "100%");
             var props = GetItemProperties();
-            TableHeader(output, props);
-            TableBody(output, props);
+            AddTableHeader(output, props);
+            AddTableBody(output, props);
+            AddTableFooter(output, props);
         }
-        private void TableHeader(TagHelperOutput output, PropertyInfo[] props)
+   
+        private void AddTableHeader(TagHelperOutput output, PropertyInfo[] props)
         {
             output.Content.AppendHtml("<thead>");
             output.Content.AppendHtml("<tr>");
@@ -29,15 +36,17 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
                 if (!prop.PropertyType.ToString().Contains("System.Collection"))
                 {
                     var name = GetPropertyName(prop);
-                    output.Content.AppendHtml(!name.Equals("Id") ? $"<th>{name}</th>" : $"<th>Ação</th>");
+                    output.Content.AppendHtml(!name.Equals("Id") ? $"<th>{name}</th>" : $"<th class=\"text-center\">Ação</th>");
                 }
             }
             output.Content.AppendHtml("</tr>");
             output.Content.AppendHtml("</thead>");
         }
-        private void TableBody(TagHelperOutput output, PropertyInfo[] props)
+
+        private void AddTableBody(TagHelperOutput output, PropertyInfo[] props)
         {
             string model = String.Empty;
+            StringBuilder htmlBotoes;
             output.Content.AppendHtml("<tbody>");
             foreach (var item in Items)
             {
@@ -48,9 +57,20 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
                     if (prop.Name.Equals("Id"))
                     {
                         model = prop.ReflectedType.Name;
-                        output.Content.AppendHtml($"<td><a href='/{model}/Details/{value}' ><span class='fa fa-search fa-2x' title='Detalhes'></a>");
-                        output.Content.AppendHtml($"<a href='/{model}/Edit/{value}' ><span class='fa fa-pencil-square fa-2x'  title='Editar'></a>");
-                        output.Content.AppendHtml($"<a href='/{model}/Delete/{value}' ><span class='fa fa-trash fa-2x'  title='Excluir'></a></td>");
+                        htmlBotoes = new StringBuilder();
+                        htmlBotoes.Append("<td>");
+                        htmlBotoes.Append($"<button class=\"btn btn-default details\" data-id=\"{value}\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Detalhes\" data-original-title=\"Detalhes\">");
+                        htmlBotoes.Append("<i class=\"glyphicon glyphicon-file\"></i>");
+                        htmlBotoes.Append("</button>");
+                        htmlBotoes.Append($"<button class=\"btn btn-primary edit\" data-id=\"{value}\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Editar\" data-original-title=\"Editar\">");
+                        htmlBotoes.Append("<i class=\"glyphicon glyphicon-edit\"></i>");
+                        htmlBotoes.Append("</button>");
+                        htmlBotoes.Append($"<button class=\"btn btn-danger delete\" data-id=\"{value}\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Excluir\" data-original-title=\"Excluir\">");
+                        htmlBotoes.Append("<i class=\"glyphicon glyphicon-trash\"></i>");
+                        htmlBotoes.Append("</button>");
+                        htmlBotoes.Append("</td>");
+                        output.Content.AppendHtml(htmlBotoes.ToString());
+                        //   output.Content.AppendHtml($"<td><a href='/{model}/Details/{value}' ><span class='fa fa-search fa-2x' title='Detalhes'></a>");
                     }
                     else
                     {
@@ -64,6 +84,23 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
             }
             output.Content.AppendHtml("</tbody>");
         }
+
+        private void AddTableFooter(TagHelperOutput output, PropertyInfo[] props)
+        {
+            output.Content.AppendHtml("<tfoot>");
+            output.Content.AppendHtml("<tr>");
+            foreach (var prop in props)
+            {
+                if (!prop.PropertyType.ToString().Contains("System.Collection"))
+                {
+                    var name = GetPropertyName(prop);
+                    output.Content.AppendHtml(!name.Equals("Id") ? $"<th>{name}</th>" : $"<th class=\"text-center\">Ação</th>");
+                }
+            }
+            output.Content.AppendHtml("</tr>");
+            output.Content.AppendHtml("</tfoot>");
+        }
+
 
         private PropertyInfo[] GetItemProperties()
         {

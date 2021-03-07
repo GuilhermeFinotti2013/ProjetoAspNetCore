@@ -1,21 +1,31 @@
-﻿
-@{
-    ViewData["Title"] = "Detalhes do tipo de paciente";
-}
+﻿@model ProjetoAspNetCore.Domain.Models.EstadoPaciente
 
-<vc:cabecalho titulo="SysMed - Controle hospitalar simples" subtitulo="Módulo Estado do paciente"></vc:cabecalho>
 
-<div class="panel panel-default panel-controls">
-    <div class="panel panel-heading">
-        <h3>Detalhes do tipo de paciente</h3>
-    </div>
-    <div class="panel panel-body">
-        <div>
-            <partial name="_delete_detalhes" />
+@{ ViewBag.Title = "Detalhes do Estado de Paciente: [ " + Model.Descricao.ToUpper() + " ]"; }
+
+@{ Layout = null; }
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">MedicalSystem</h4>
         </div>
-        <div>
-            <a asp-controller="EstadoPaciente" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
-            <a asp-controller="EstadoPaciente" asp-action="Index" class="btn btn-default">Voltar à lista</a>
+        <div class="modal-body">
+            <div class="form-horizontal">
+
+                <div>
+                    <h4> @ViewBag.Title </h4>
+                    <hr />
+                    <detalhar-dado Dado="@Model"></detalhar-dado>
+                </div>
+
+            </div>
         </div>
-    </div>
-</div>
+        <div class="modal-footer">
+            <input type="button" value="Fechar" class="btn btn-default" data-dismiss="modal" />
+        </div>
+
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
