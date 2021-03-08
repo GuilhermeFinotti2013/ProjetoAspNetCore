@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Text;
 using ProjetoAspNetCore.Domain.Entities;
@@ -12,7 +12,9 @@ namespace ProjetoAspNetCore.Domain.Models
 
         }
 
+        [Display(Name = "Código")]
         public int Codigo { get; set; }
+
         public string Nome { get; set; }
     }
 }

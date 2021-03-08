@@ -39,14 +39,24 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
         {
             string descricao = String.Empty;
             IEnumerable<Attribute> listaAtributos = propridade.GetCustomAttributes();
-            DisplayAttribute displayAttribute;
-            foreach (Attribute atributo in listaAtributos)
+            bool temDisplayAttribute = false;
+            if (listaAtributos.Count() > 0)
             {
-                if (atributo.GetType().FullName == typeof(DisplayAttribute).FullName)
+                DisplayAttribute displayAttribute;
+                foreach (Attribute atributo in listaAtributos)
                 {
-                    displayAttribute = (DisplayAttribute)atributo;
-                    descricao = displayAttribute.Name;
+                    if (atributo.GetType().FullName == typeof(DisplayAttribute).FullName)
+                    {
+                        displayAttribute = (DisplayAttribute)atributo;
+                        descricao = displayAttribute.Name;
+                        temDisplayAttribute = true;
+                    }
                 }
+            }
+
+            if (!temDisplayAttribute)
+            {
+                descricao = propridade.Name;
             }
             return descricao;
         }

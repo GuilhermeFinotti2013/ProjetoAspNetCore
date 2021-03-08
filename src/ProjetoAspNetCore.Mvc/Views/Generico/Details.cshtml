@@ -1,13 +1,9 @@
 ﻿@model ProjetoAspNetCore.Domain.Models.Generico
 
-
-
 @{
     ViewBag.Title = "Detalhes do Genérico: [ " + Model.Nome.ToUpper() + " ]";
+    Layout = null;
 }
-
-@{ Layout = null; }
-
 
 <div class="modal-dialog">
     <div class="modal-content">
@@ -17,29 +13,15 @@
         </div>
         <div class="modal-body">
             <div class="form-horizontal">
-
                 <div>
                     <h4> @ViewBag.Title </h4>
                     <hr />
-                    <dl class="dl-horizontal">
-
-                        <dt>ID: </dt>
-                        <dd>@Html.DisplayFor(model => model.Id)</dd>
-
-                        <dt>CÓDIGO: </dt>
-                        <dd>@Html.DisplayFor(model => model.Codigo)</dd>
-
-                        <dt>GENÉRICO: </dt>
-                        <dd>@Html.DisplayFor(model => model.Nome)</dd>
-
-                    </dl>
+                    <detalhar-dado Dado="@Model"></detalhar-dado>
                 </div>
-
             </div>
         </div>
         <div class="modal-footer">
             <input type="button" value="Fechar" class="btn btn-default" data-dismiss="modal" />
         </div>
-
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
