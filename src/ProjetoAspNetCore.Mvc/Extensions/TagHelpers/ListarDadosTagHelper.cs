@@ -53,7 +53,7 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
                 output.Content.AppendHtml("<tr>");
                 foreach (var prop in props)
                 {
-                    var value = GetPropertyValue(prop, item);
+                    var value = prop.GetValue(item);
                     if (prop.Name.Equals("Id"))
                     {
                         model = prop.ReflectedType.Name;
@@ -70,7 +70,6 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
                         htmlBotoes.Append("</button>");
                         htmlBotoes.Append("</td>");
                         output.Content.AppendHtml(htmlBotoes.ToString());
-                        //   output.Content.AppendHtml($"<td><a href='/{model}/Details/{value}' ><span class='fa fa-search fa-2x' title='Detalhes'></a>");
                     }
                     else
                     {
@@ -79,8 +78,6 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
                     }
                 }
                 output.Content.AppendHtml("</tr>");
-
-                // <span class="fa fa-pencil-square fa-2x" title="Editar Paciente"></span>
             }
             output.Content.AppendHtml("</tbody>");
         }
@@ -140,10 +137,6 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
             return property.Name;
 
 
-        }
-        private object GetPropertyValue(PropertyInfo property, object instance)
-        {
-            return property.GetValue(instance);
         }
     }
 }

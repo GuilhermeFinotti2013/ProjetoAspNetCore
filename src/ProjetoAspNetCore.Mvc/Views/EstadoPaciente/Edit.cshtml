@@ -1,9 +1,8 @@
 ﻿@model ProjetoAspNetCore.Domain.Models.EstadoPaciente
+@using ProjetoAspNetCore.Mvc.Enums
 
-@{ ViewBag.Title = "Edição do Estado de Paciente: [ " + Model.Descricao.ToUpper() + " ]"; }
-
-
-@{ Layout = null; }
+@{ ViewBag.Title = "Edição do Estado de Paciente: [ " + Model.Descricao.ToUpper() + " ]";
+                Layout = null; }
 
 <div class="modal-dialog">
     <div class="modal-content">
@@ -17,17 +16,7 @@
 
                 <div class="modal-body">
                     <div class="form-horizontal">
-
-                        <div class="form-horizontal">
-                            <h4> @ViewBag.Title </h4>
-                            <hr />
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            @Html.HiddenFor(model => model.Id)
-
-                            <partial name="_criar_editar" />
-
-                        </div>
-
+                        <montar-formulario Modelo="@Model" Titulo="@ViewData["Title"]" Tipo="@TipoFormulario.Editar"></montar-formulario>
                     </div>
                 </div>
                                 <div class="modal-footer">

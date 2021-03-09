@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.ComponentModel.DataAnnotations;
+using ProjetoAspNetCore.Mvc.Extensions.ExtensionsMethods;
 
 namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
 {
@@ -29,36 +27,10 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
                     propriedade.PropertyType.FullName == typeof(DateTime).FullName ||
                     propriedade.PropertyType.FullName == typeof(Boolean).FullName)
                 {
-                    output.Content.AppendHtml($"<dt>{GetDescricaoAtrbuto(propriedade)}:</dt>");
+                    output.Content.AppendHtml($"<dt>{propriedade.GetDisplay()}:</dt>");
                     output.Content.AppendHtml($"<dd>{propriedade.GetValue(Dado)}</dd>");
                 }
             }
-        }
-
-        private string GetDescricaoAtrbuto(PropertyInfo propridade)
-        {
-            string descricao = String.Empty;
-            IEnumerable<Attribute> listaAtributos = propridade.GetCustomAttributes();
-            bool temDisplayAttribute = false;
-            if (listaAtributos.Count() > 0)
-            {
-                DisplayAttribute displayAttribute;
-                foreach (Attribute atributo in listaAtributos)
-                {
-                    if (atributo.GetType().FullName == typeof(DisplayAttribute).FullName)
-                    {
-                        displayAttribute = (DisplayAttribute)atributo;
-                        descricao = displayAttribute.Name;
-                        temDisplayAttribute = true;
-                    }
-                }
-            }
-
-            if (!temDisplayAttribute)
-            {
-                descricao = propridade.Name;
-            }
-            return descricao;
         }
     }
 }
