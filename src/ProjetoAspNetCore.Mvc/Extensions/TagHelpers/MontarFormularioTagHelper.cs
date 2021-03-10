@@ -18,19 +18,6 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
         [HtmlAttributeName("Tipo")]
         public TipoFormulario Tipo { get; set; }
 
-        /*
-         
-	<div class="form-group">
-		<label class="control-label col-md-2" for="Codigo">Código</label>
-		<div class="col-md-10">
-			<input class="form-control text-box single-line" data-val="true" data-val-required="The Código field is required." id="Codigo" name="Codigo" type="number" value="">
-			<span class="field-validation-valid text-danger" data-valmsg-for="Codigo" data-valmsg-replace="true"></span>
-		</div>
-	</div>
-
-         */
-
-
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.TagName = "div";

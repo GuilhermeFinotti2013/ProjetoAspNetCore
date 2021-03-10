@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjetoAspNetCore.Data.ORM;
 using ProjetoAspNetCore.Domain.Models;
+using ProjetoAspNetCore.Mvc.ViewModel;
 
 namespace ProjetoAspNetCore.Mvc.Controllers
 {
-    [Authorize(Roles = "Admin")]
+//    [Authorize(Roles = "Admin")]
     public class PacienteController : Controller
     {
         private readonly CursoDbContext _context;
@@ -24,8 +25,10 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         // GET: Paciente
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Paciente.Include(x => x.EstadoPaciente)
-                .AsNoTracking().ToListAsync());
+            var registrosObtidos = _context.Paciente.Include(e => e.EstadoPaciente).ToList();
+            List<PacienteViewModel> listaExibicao = ConverterParaViewModels(registrosObtidos);
+            
+            return View(listaExibicao);
         }
 
         // GET: Paciente/Details/5
@@ -145,6 +148,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         }
 
         // POST: Paciente/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -159,5 +163,28 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         {
             return _context.Paciente.Any(e => e.Id == id);
         }
+
+        #region Métodos auxiliares
+        private List<PacienteViewModel> ConverterParaViewModels(List<Paciente> registros)
+        {
+            List<PacienteViewModel> lista = new List<PacienteViewModel>();
+            PacienteViewModel viewModel;
+            foreach (Paciente paciente in registros)
+            {
+                viewModel = new PacienteViewModel();
+                viewModel.Id = paciente.Id;
+                viewModel.Nome = paciente.Nome;
+                viewModel.DataNascimento = paciente.DataNascimento;
+                viewModel.DataInternacao = paciente.DataInternacao;
+                viewModel.Email = paciente.Email;
+                viewModel.Sexo = paciente.Sexo;
+                viewModel.TipoPaciente = paciente.TipoPaciente;
+                viewModel.EstdoPaciente = paciente.EstadoPaciente.Descricao;
+                viewModel.Ativo = paciente.Ativo;
+                lista.Add(viewModel);
+            }
+            return lista;
+        }
+        #endregion
     }
 }

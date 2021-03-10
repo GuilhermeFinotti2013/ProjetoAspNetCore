@@ -24,11 +24,22 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
             {
                 if (propriedade.PropertyType.FullName == typeof(String).FullName ||
                     propriedade.PropertyType.FullName == typeof(Int32).FullName ||
-                    propriedade.PropertyType.FullName == typeof(DateTime).FullName ||
-                    propriedade.PropertyType.FullName == typeof(Boolean).FullName)
+                    propriedade.PropertyType.FullName.Contains("ProjetoAspNetCore.Domain.Enums"))
                 {
                     output.Content.AppendHtml($"<dt>{propriedade.GetDisplay()}:</dt>");
                     output.Content.AppendHtml($"<dd>{propriedade.GetValue(Dado)}</dd>");
+                }
+                else if (propriedade.PropertyType.FullName == typeof(Boolean).FullName)
+                {
+                    string valorBool = (Boolean)propriedade.GetValue(Dado) ? "Sim" : "Não";
+                    output.Content.AppendHtml($"<dt>{propriedade.GetDisplay()}:</dt>");
+                    output.Content.AppendHtml($"<dd>{valorBool}</dd>");
+                }
+                else if (propriedade.PropertyType.FullName == typeof(DateTime).FullName)
+                {
+                    DateTime data = (DateTime)propriedade.GetValue(Dado);
+                    output.Content.AppendHtml($"<dt>{propriedade.GetDisplay()}:</dt>");
+                    output.Content.AppendHtml($"<dd>{data.ToBrazilianDate()}</dd>");
                 }
             }
         }

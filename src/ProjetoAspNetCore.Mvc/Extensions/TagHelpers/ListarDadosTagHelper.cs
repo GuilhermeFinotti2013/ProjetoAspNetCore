@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using ProjetoAspNetCore.Mvc.Extensions.ExtensionsMethods;
 
 namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
 {
@@ -21,83 +21,106 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
             output.Attributes.Add("style", "width:100%");
             output.Attributes.Add("cellspacing", "0");
             output.Attributes.Add("width", "100%");
-            var props = GetItemProperties();
-            AddTableHeader(output, props);
-            AddTableBody(output, props);
-            AddTableFooter(output, props);
+            var listaDeProriedades = GetItemProperties();
+            AddTableHeader(output, listaDeProriedades);
+            AddTableBody(output, listaDeProriedades);
+            AddTableFooter(output, listaDeProriedades);
         }
-   
-        private void AddTableHeader(TagHelperOutput output, PropertyInfo[] props)
+
+        private void AddTableHeader(TagHelperOutput output, PropertyInfo[] listaDeProriedades)
         {
             output.Content.AppendHtml("<thead>");
             output.Content.AppendHtml("<tr>");
-            foreach (var prop in props)
+            foreach (var propriedade in listaDeProriedades)
             {
-                if (!prop.PropertyType.ToString().Contains("System.Collection"))
+                if (!propriedade.Name.Equals("Id") &&
+                    !propriedade.PropertyType.ToString().Contains("System.Collection"))
                 {
-                    var name = GetPropertyName(prop);
-                    output.Content.AppendHtml(!name.Equals("Id") ? $"<th>{name}</th>" : $"<th class=\"text-center\">Ação</th>");
+                    output.Content.AppendHtml($"<th>{propriedade.GetDisplay()}</th>");
                 }
             }
+            output.Content.AppendHtml("<th class=\"text-center\">Ação</th>");
             output.Content.AppendHtml("</tr>");
             output.Content.AppendHtml("</thead>");
         }
 
-        private void AddTableBody(TagHelperOutput output, PropertyInfo[] props)
+        private void AddTableBody(TagHelperOutput output, PropertyInfo[] listaDeProriedades)
         {
-            string model = String.Empty;
-            StringBuilder htmlBotoes;
             output.Content.AppendHtml("<tbody>");
             foreach (var item in Items)
             {
                 output.Content.AppendHtml("<tr>");
-                foreach (var prop in props)
+                foreach (var propriedade in listaDeProriedades)
                 {
-                    var value = prop.GetValue(item);
-                    if (prop.Name.Equals("Id"))
+                    if (!propriedade.Name.Equals("Id") && !propriedade.PropertyType.ToString().Contains("Collection"))
                     {
-                        model = prop.ReflectedType.Name;
-                        htmlBotoes = new StringBuilder();
-                        htmlBotoes.Append("<td>");
-                        htmlBotoes.Append($"<button class=\"btn btn-default details\" data-id=\"{value}\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Detalhes\" data-original-title=\"Detalhes\">");
-                        htmlBotoes.Append("<i class=\"glyphicon glyphicon-file\"></i>");
-                        htmlBotoes.Append("</button>");
-                        htmlBotoes.Append($"<button class=\"btn btn-primary edit\" data-id=\"{value}\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Editar\" data-original-title=\"Editar\">");
-                        htmlBotoes.Append("<i class=\"glyphicon glyphicon-edit\"></i>");
-                        htmlBotoes.Append("</button>");
-                        htmlBotoes.Append($"<button class=\"btn btn-danger delete\" data-id=\"{value}\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Excluir\" data-original-title=\"Excluir\">");
-                        htmlBotoes.Append("<i class=\"glyphicon glyphicon-trash\"></i>");
-                        htmlBotoes.Append("</button>");
-                        htmlBotoes.Append("</td>");
-                        output.Content.AppendHtml(htmlBotoes.ToString());
-                    }
-                    else
-                    {
-                        if (!prop.PropertyType.ToString().Contains("Collection"))
-                            output.Content.AppendHtml($"<td>{value}</td>");
+                        var valor = propriedade.GetValue(item);
+                        if (propriedade.PropertyType.FullName == typeof(Boolean).FullName)
+                        {
+                            String texto = (Boolean)valor == true ? "Sim" : "Não";
+                            output.Content.AppendHtml($"<td>{texto}</td>");
+                        }
+                        else if (propriedade.PropertyType.FullName == typeof(DateTime).FullName)
+                        {
+                            DateTime data = (DateTime)valor;
+                            output.Content.AppendHtml($"<td>{data.ToBrazilianDate()}</td>");
+                        }
+                        else
+                        {
+                            output.Content.AppendHtml($"<td>{valor}</td>");
+                        }
                     }
                 }
-                output.Content.AppendHtml("</tr>");
+                AddColunaAcoes(output, item);
             }
+            output.Content.AppendHtml("</tr>");
             output.Content.AppendHtml("</tbody>");
         }
 
-        private void AddTableFooter(TagHelperOutput output, PropertyInfo[] props)
+        private void AddColunaAcoes(TagHelperOutput output, object dado)
         {
-            output.Content.AppendHtml("<tfoot>");
-            output.Content.AppendHtml("<tr>");
-            foreach (var prop in props)
+            PropertyInfo[] listaDePropriedades = GetItemProperties();
+            string model = String.Empty;
+            StringBuilder htmlBotoes;
+
+            foreach (PropertyInfo propriedade in listaDePropriedades)
             {
-                if (!prop.PropertyType.ToString().Contains("System.Collection"))
+                if (propriedade.Name.Equals("Id"))
                 {
-                    var name = GetPropertyName(prop);
-                    output.Content.AppendHtml(!name.Equals("Id") ? $"<th>{name}</th>" : $"<th class=\"text-center\">Ação</th>");
+                    var value = propriedade.GetValue(dado);
+                    model = propriedade.ReflectedType.Name;
+                    htmlBotoes = new StringBuilder();
+                    htmlBotoes.Append("<td>");
+                    htmlBotoes.Append($"<button class=\"btn btn-default details\" data-id=\"{value}\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Detalhes\" data-original-title=\"Detalhes\">");
+                    htmlBotoes.Append("<i class=\"glyphicon glyphicon-file\"></i>");
+                    htmlBotoes.Append("</button>");
+                    htmlBotoes.Append($"<button class=\"btn btn-primary edit\" data-id=\"{value}\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Editar\" data-original-title=\"Editar\">");
+                    htmlBotoes.Append("<i class=\"glyphicon glyphicon-edit\"></i>");
+                    htmlBotoes.Append("</button>");
+                    htmlBotoes.Append($"<button class=\"btn btn-danger delete\" data-id=\"{value}\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Excluir\" data-original-title=\"Excluir\">");
+                    htmlBotoes.Append("<i class=\"glyphicon glyphicon-trash\"></i>");
+                    htmlBotoes.Append("</button>");
+                    htmlBotoes.Append("</td>");
+                    output.Content.AppendHtml(htmlBotoes.ToString());
                 }
             }
-            output.Content.AppendHtml("</tr>");
-            output.Content.AppendHtml("</tfoot>");
         }
 
+        private void AddTableFooter(TagHelperOutput output, PropertyInfo[] listaDeProriedades)
+        {
+            output.Content.AppendHtml("<tfoot>");
+            output.Content.AppendHtml("<tr>"); 
+            foreach (var propriedade in listaDeProriedades)
+            {
+                if (!propriedade.Name.Equals("Id") &&
+                    !propriedade.PropertyType.ToString().Contains("System.Collection"))
+                {
+                    output.Content.AppendHtml($"<th>{propriedade.GetDisplay()}</th>");
+                }
+            }
+            output.Content.AppendHtml("<th class=\"text-center\">Ação</th>");
+            output.Content.AppendHtml("</tfoot>");
+        }
 
         private PropertyInfo[] GetItemProperties()
         {
@@ -110,33 +133,5 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
             return new PropertyInfo[] { };
         }
 
-        /// <summary>
-        /// ------------------------------------------------------------------ //
-        /// //Funciona com essa notação: [DisplayName(displayName:"Descrição")]
-        /// var attribute = property.GetCustomAttribute<DisplayNameAttribute>();
-        /// if (attribute != null)
-        /// {
-        ///     return attribute.DisplayName; // Muda aqui
-        /// }
-        /// return property.Name;
-        /// ------------------------------------------------------------------ // 
-        /// </summary>
-        /// <param name="property"></param>
-        /// <returns></returns>
-
-        private string GetPropertyName(PropertyInfo property)
-        {
-
-
-            // Funciona com essa notação: [Display(Name = "Estado do Paciente")]
-            var attribute = property.GetCustomAttribute<DisplayAttribute>();
-            if (attribute != null)
-            {
-                return attribute.Name; // Muda aqui
-            }
-            return property.Name;
-
-
-        }
     }
 }
