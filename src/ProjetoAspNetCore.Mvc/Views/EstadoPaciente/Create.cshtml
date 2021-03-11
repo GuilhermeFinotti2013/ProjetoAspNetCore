@@ -1,10 +1,17 @@
 ﻿@using ProjetoAspNetCore.Domain.Models
-@using ProjetoAspNetCore.Mvc.Enums 
+@using ProjetoAspNetCore.Mvc.Infra.Enums
+@using ProjetoAspNetCore.Mvc.Infra.TOs
 
 @{
     ViewData["Title"] = "Adicionar novo estado de paciente";
     Layout = null;
     var modelo = new EstadoPaciente();
+    TOConfiguracaoFormulario configuracaoFormulario = new TOConfiguracaoFormulario()
+    {
+        Titulo = ViewBag.Title,
+        TipoDoFormulario = TipoFormulario.Inserir,
+        Dado = modelo
+    };
 }
 
 <div class="modal-dialog">
@@ -20,7 +27,7 @@
 
             <div class="modal-body">
                 <div class="form-horizontal">
-                    <montar-formulario Modelo="@modelo" Titulo="@ViewData["Title"]" Tipo="@TipoFormulario.Inserir"></montar-formulario>                    
+                    <montar-formulario configuracao="@configuracaoFormulario"></montar-formulario>
                 </div>
             </div>
             <div class="modal-footer">

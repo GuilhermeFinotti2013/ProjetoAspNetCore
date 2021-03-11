@@ -1,26 +1,37 @@
-﻿
+﻿@using ProjetoAspNetCore.Domain.Models
+@using ProjetoAspNetCore.Mvc.Infra.Enums
 
 @{
-    ViewData["Title"] = "Novo paciente";
+    ViewData["Title"] = "Adicionar novo paciente";
+    Layout = null;
+    var modelo = new Paciente();
 }
 
-<vc:cabecalho titulo="SysMed - Controle hospitalar simples" subtitulo="Módulo de paciente"></vc:cabecalho>
+<div class="modal-dialog">
+    <div class="modal-content">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-<div class="panel panel-default panel-controls">
-    <div class="panel panel-heading">
-        <h3>Adicionar novo Paciente</h3>
-    </div>
-    <div class="panel panel-body">
-        <form asp-action="Create">
-            <div>
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <partial name="_criar_editar" />
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">MedicalSystem</h4>
             </div>
-            <div>
-                <input type="submit" value="Adicionar paciente" class="btn btn-success" />
-                <a asp-controller="Paciente" asp-action="Index" class="btn btn-default">Voltar à lista</a>
+
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <!--montar-formulario Modelo="modelo" Titulo="ViewData["Title"]" Tipo="ipoFormulario.Inserir"></!--montar-formulario -->
+                    
+                </div>
             </div>
-        </form>
+            <div class="modal-footer">
+                <input type="submit" value="Adicionar" class="btn btn-success" />
+                <input type="button" value="Cancelar" class="btn btn-default" data-dismiss="modal" />
+            </div>
+        }
     </div>
 </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 

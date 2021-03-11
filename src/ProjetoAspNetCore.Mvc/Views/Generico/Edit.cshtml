@@ -1,9 +1,16 @@
 ﻿@model ProjetoAspNetCore.Domain.Models.Generico
-@using ProjetoAspNetCore.Mvc.Enums
+@using ProjetoAspNetCore.Mvc.Infra.Enums
+@using ProjetoAspNetCore.Mvc.Infra.TOs 
 
 @{
-    ViewBag.Title = "Edição do Genérico: [ " + Model.Nome.ToUpper() + " ]"; 
+    ViewBag.Title = "Edição do Genérico: [ " + Model.Nome.ToUpper() + " ]";
     Layout = null;
+    TOConfiguracaoFormulario configuracaoFormulario = new TOConfiguracaoFormulario()
+    {
+        Titulo = ViewBag.Title,
+        TipoDoFormulario = TipoFormulario.Editar,
+        Dado = Model
+    };
 }
 
 <div class="modal-dialog">
@@ -17,7 +24,7 @@
             @Html.AntiForgeryToken()
                 <div class="modal-body">
                     <div class="form-horizontal">
-                        <montar-formulario Modelo="@Model" Titulo="@ViewData["Title"]" Tipo="@TipoFormulario.Editar"></montar-formulario>
+                        <montar-formulario configuracao="@configuracaoFormulario"></montar-formulario>
                     </div>
                 </div>
                 <div class="modal-footer">

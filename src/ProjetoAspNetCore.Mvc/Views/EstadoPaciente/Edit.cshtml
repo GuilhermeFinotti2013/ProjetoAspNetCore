@@ -1,8 +1,15 @@
 ﻿@model ProjetoAspNetCore.Domain.Models.EstadoPaciente
-@using ProjetoAspNetCore.Mvc.Enums
+@using ProjetoAspNetCore.Mvc.Infra.Enums
+@using ProjetoAspNetCore.Mvc.Infra.TOs
 
 @{ ViewBag.Title = "Edição do Estado de Paciente: [ " + Model.Descricao.ToUpper() + " ]";
-                Layout = null; }
+    Layout = null;
+    TOConfiguracaoFormulario configuracaoFormulario = new TOConfiguracaoFormulario()
+    {
+        Titulo = ViewBag.Title,
+        TipoDoFormulario = TipoFormulario.Editar,
+        Dado = Model
+    }; }
 
 <div class="modal-dialog">
     <div class="modal-content">
@@ -12,16 +19,16 @@
         </div>
         @using (Html.BeginForm())
         {
-@Html.AntiForgeryToken()
-
-                <div class="modal-body">
-                    <div class="form-horizontal">
-                        <montar-formulario Modelo="@Model" Titulo="@ViewData["Title"]" Tipo="@TipoFormulario.Editar"></montar-formulario>
-                    </div>
+            @Html.AntiForgeryToken()
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <montar-formulario configuracao="@configuracaoFormulario"></montar-formulario>
                 </div>
-                                <div class="modal-footer">
-                                    <input type="submit" value="Atualizar" class="btn btn-success" />
-                                    <input type="button" value="Cancelar" class="btn btn-default" data-dismiss="modal" />
-                                </div>}
-    </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
+            </div>
+            <div class="modal-footer">
+                <input type="submit" value="Atualizar" class="btn btn-success" />
+                <input type="button" value="Cancelar" class="btn btn-default" data-dismiss="modal" />
+            </div>
+        }
+    </div>
+</div>

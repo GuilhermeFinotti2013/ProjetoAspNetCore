@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
-using ProjetoAspNetCore.Mvc.Enums;
+using ProjetoAspNetCore.Mvc.Infra.Enums;
+using ProjetoAspNetCore.Mvc.Infra.TOs;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,21 +12,45 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
 {
     public class MontarFormularioTagHelper : TagHelper
     {
-        [HtmlAttributeName("Modelo")]
-        public object Modelo { get; set; }
-        [HtmlAttributeName("Titulo")]
-        public string Titulo { get; set; }
-        [HtmlAttributeName("Tipo")]
-        public TipoFormulario Tipo { get; set; }
+        [HtmlAttributeName("configuracao")]
+        public TOConfiguracaoFormulario ConfiguracaoFormulario { get; set; }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.TagName = "div";
             output.Attributes.Add("class", "form-horizontal");
-            PropertyInfo[] listaDePropriedades = Modelo.GetType().GetProperties();
-            output.Content.AppendHtml($"<h4>{Titulo}</h4>");
-            output.Content.AppendHtml("<hr/>");
-            if (Tipo == TipoFormulario.Editar)
+
+            if (ConfiguracaoFormulario == null || ConfiguracaoFormulario.Dado == null ||
+                ConfiguracaoFormulario.TipoDoFormulario == 0 || ConfiguracaoFormulario.Titulo == null)
+            {
+                output.Content.AppendHtml("<h1 style=\"color: red;\">Falha ao configurar o formulário!</h1>");
+            }
+            else
+            {
+                output.Content.AppendHtml($"<h4>{ConfiguracaoFormulario.Titulo}</h4>");
+                output.Content.AppendHtml("<hr/>");
+                if (ConfiguracaoFormulario.TipoDoFormulario == TipoFormulario.Editar ||
+                     ConfiguracaoFormulario.TipoDoFormulario == TipoFormulario.Inserir)
+                {
+                    MontarFormularioSimples(output);
+                }
+                else if (ConfiguracaoFormulario.TipoDoFormulario == TipoFormulario.EditarEspecializado ||
+                         ConfiguracaoFormulario.TipoDoFormulario == TipoFormulario.InserirEspecializado)
+                {
+
+                }
+            }
+            
+            
+            
+            
+        }
+
+        private void MontarFormularioSimples(TagHelperOutput output)
+        {
+            PropertyInfo[] listaDePropriedades = ConfiguracaoFormulario.Dado.GetType().GetProperties();
+
+            if (ConfiguracaoFormulario.TipoDoFormulario == TipoFormulario.Editar)
             {
                 output.Content.AppendHtml($"<input data-val=\"true\" id=\"Id\" name=\"Id\" type=\"hidden\" value=\"{GetIdDado()}\">");
             }
@@ -36,12 +61,12 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
                     propriedade.PropertyType.FullName == typeof(DateTime).FullName ||
                     propriedade.PropertyType.FullName == typeof(Boolean).FullName)
                 {
-                    AddCampo(output, propriedade);
+                    AddCampoEditavel(output, propriedade);
                 }
             }
         }
 
-        private void AddCampo(TagHelperOutput output, PropertyInfo propriedade)
+        private void AddCampoEditavel(TagHelperOutput output, PropertyInfo propriedade)
         {
             output.Content.AppendHtml("<div class=\"form-group\">");
             output.Content.AppendHtml($"<label class=\"control-label col-md-2\" for=\"{propriedade.Name}\">{propriedade.GetDisplay()}</label>");
@@ -59,9 +84,13 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
             {
                 output.Content.AppendHtml("type=\"number\" ");
             }
-            if (Tipo == TipoFormulario.Editar)
+            if (ConfiguracaoFormulario.TipoDoFormulario == TipoFormulario.Editar)
             {
-                output.Content.AppendHtml($"value=\"{propriedade.GetValue(Modelo)}\"");
+                output.Content.AppendHtml($"value=\"{propriedade.GetValue(ConfiguracaoFormulario.Dado)}\"");
+            }
+            else if (propriedade.PropertyType.FullName == typeof(DateTime).FullName)
+            {
+                output.Content.AppendHtml("type=\"datetime-local\" style=\"width: 200px\" ");
             }
             else
             {
@@ -75,12 +104,12 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
         private Guid GetIdDado()
         {
             Guid id = Guid.Empty;
-            PropertyInfo[] listaDePropriedades = Modelo.GetType().GetProperties();
+            PropertyInfo[] listaDePropriedades = ConfiguracaoFormulario.Dado.GetType().GetProperties();
             foreach (PropertyInfo propriedade in listaDePropriedades)
             {
                 if (propriedade.Name == "Id")
                 {
-                    id = (Guid)propriedade.GetValue(Modelo);
+                    id = (Guid)propriedade.GetValue(ConfiguracaoFormulario.Dado);
                 }
             }
             return id;

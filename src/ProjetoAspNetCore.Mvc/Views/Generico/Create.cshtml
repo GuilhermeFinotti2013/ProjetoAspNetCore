@@ -1,9 +1,17 @@
 ﻿@using ProjetoAspNetCore.Domain.Models
-@using ProjetoAspNetCore.Mvc.Enums
+@using ProjetoAspNetCore.Mvc.Infra.Enums
+@using ProjetoAspNetCore.Mvc.Infra.TOs 
 
 @{ ViewBag.Title = "Adicionar novo Genérico";
-                Layout = "";
-                var modelo = new Generico(); }
+    Layout = "";
+    var modelo = new Generico();
+    TOConfiguracaoFormulario configuracaoFormulario = new TOConfiguracaoFormulario()
+    {
+        Titulo = ViewBag.Title,
+        TipoDoFormulario = TipoFormulario.Inserir,
+        Dado = modelo
+    };
+}
 
 <div class="modal-dialog">
     <div class="modal-content">
@@ -18,7 +26,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-horizontal">
-                    <montar-formulario Modelo="@modelo" Titulo="@ViewData["Title"]" Tipo="@TipoFormulario.Inserir"></montar-formulario>
+                    <montar-formulario configuracao="@configuracaoFormulario"></montar-formulario>
                 </div>
             </div>
             <div class="modal-footer">
