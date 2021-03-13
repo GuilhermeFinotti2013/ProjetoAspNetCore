@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjetoAspNetCore.Data.ORM;
 using ProjetoAspNetCore.Domain.Models;
+using ProjetoAspNetCore.Mvc.Infra.Enums;
 using ProjetoAspNetCore.Mvc.ViewModel;
+using ProjetoAspNetCore.Mvc.Infra;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using ProjetoAspNetCore.Mvc.Infra.TOs;
 
 namespace ProjetoAspNetCore.Mvc.Controllers
 {
-//    [Authorize(Roles = "Admin")]
+    //    [Authorize(Roles = "Admin")]
     public class PacienteController : Controller
     {
         private readonly CursoDbContext _context;
@@ -52,8 +54,21 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         // GET: Paciente/Create
         public IActionResult Create()
         {
-            ViewBag.EstadoPaciente = new SelectList(_context.EstadoPaciente, "Id", "Descricao");
-            return View();
+            TOConfiguracaoFormulario configuracaoFormulario = new TOConfiguracaoFormulario();
+            configuracaoFormulario.Titulo = "Adicionar novo paciente";
+            configuracaoFormulario.TipoDoFormulario = TipoFormulario.InserirEspecializado;
+            configuracaoFormulario.Dado = new Paciente();
+            configuracaoFormulario.ConfiguracaoCampos = new List<TOConfiguracaoCampo>();
+            configuracaoFormulario.ConfiguracaoCampos.Add(new TOConfiguracaoCampo("Ativo", TipoCampo.SimNao, null));
+            configuracaoFormulario.ConfiguracaoCampos.Add(new TOConfiguracaoCampo("Sexo", TipoCampo.Combo,
+                ConversorDeEnuns.EnumParaSelectItem(TipoEnunsConvertiveis.Sexo)));
+            configuracaoFormulario.ConfiguracaoCampos.Add(new TOConfiguracaoCampo("TipoPaciente", TipoCampo.Combo,
+                            ConversorDeEnuns.EnumParaSelectItem(TipoEnunsConvertiveis.TipoPaciente)));
+            configuracaoFormulario.ConfiguracaoCampos.Add(new TOConfiguracaoCampo("EstadoPacienteId", TipoCampo.Combo,
+                            EstadoPacientesParaSelectItens(_context.EstadoPaciente.ToList())));
+            configuracaoFormulario.TamalhoLabel = 3;
+
+            return View(configuracaoFormulario);
         }
 
         // POST: Paciente/Create
@@ -185,6 +200,21 @@ namespace ProjetoAspNetCore.Mvc.Controllers
             }
             return lista;
         }
+
+        private List<TOSelectItem> EstadoPacientesParaSelectItens(List<EstadoPaciente> registros)
+        {
+            List<TOSelectItem> lista = new List<TOSelectItem>();
+            foreach (EstadoPaciente estado in registros)
+            {
+                lista.Add(new TOSelectItem
+                {
+                    Valor = estado.Id,
+                    Descricao = estado.Descricao
+                });
+            }
+            return lista;
+        }
+
         #endregion
     }
 }

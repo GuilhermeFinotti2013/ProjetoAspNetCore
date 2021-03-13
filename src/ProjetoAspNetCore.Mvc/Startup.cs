@@ -113,7 +113,7 @@ namespace ProjetoAspNetCore.Mvc
             };
 
             // register logs output
-            RegisterKissLogListeners(options);
+            //RegisterKissLogListeners(options);
         }
 
         private void RegisterKissLogListeners(IOptionsBuilder options)

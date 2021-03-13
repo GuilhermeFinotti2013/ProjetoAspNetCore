@@ -8,8 +8,15 @@ namespace ProjetoAspNetCore.Mvc.Infra.TOs
 {
     public class TOConfiguracaoCampo
     {
-        public int Posicao { get; set; }
+        public TOConfiguracaoCampo(string nomePropriedade, TipoCampo tipo, List<TOSelectItem> itensCombo)
+        {
+            NomePropriedade = nomePropriedade;
+            Tipo = tipo;
+            ItensCombo = itensCombo;
+        }
+
+        public string NomePropriedade { get; set; }
         public TipoCampo Tipo { get; set; }
-        public List<object> ItensCombo { get; set; }
+        public List<TOSelectItem> ItensCombo { get; set; }
     }
 }

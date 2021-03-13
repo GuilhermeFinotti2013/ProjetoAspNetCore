@@ -15,22 +15,23 @@ namespace ProjetoAspNetCore.Domain.Models
             this.Ativo = true;
         }
 
-        [ForeignKey("EstadoPaciente")]
-        [Display(Name = "Estado do paciente")]
-        public Guid EstadoPacienteId { get; set; }
-        public virtual EstadoPaciente EstadoPaciente { get; set; }
         public string Nome { get; set; }
         [Display(Name = "Data de nascimento")]
         public DateTime DataNascimento { get; set; }
         [Display(Name = "Data da internação")]
         public DateTime DataInternacao { get; set; }
+        public Sexo Sexo { get; set; }
         public string Email { get; set; }
         public bool Ativo { get; set; }
         [Display(Name = "CPF")]
         public string Cpf { get; set; }
         [Display(Name = "Tipo do paciente")]
         public TipoPaciente TipoPaciente { get; set; }
-        public Sexo Sexo { get; set; }
+        [ForeignKey("EstadoPaciente")]
+        [Display(Name = "Estado do paciente")]
+        public Guid EstadoPacienteId { get; set; }
+        [Display(Name = "Estado do paciente")]
+        public virtual EstadoPaciente EstadoPaciente { get; set; }
         [Display(Name = "RG")]
         public string Rg { get; set; }
         [Display(Name = "Orgão expedidor")]

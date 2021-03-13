@@ -1,10 +1,8 @@
-﻿@using ProjetoAspNetCore.Domain.Models
-@using ProjetoAspNetCore.Mvc.Infra.Enums
+﻿@model ProjetoAspNetCore.Mvc.Infra.TOs.TOConfiguracaoFormulario 
 
 @{
-    ViewData["Title"] = "Adicionar novo paciente";
+    ViewData["Title"] = Model.Titulo;
     Layout = null;
-    var modelo = new Paciente();
 }
 
 <div class="modal-dialog">
@@ -20,8 +18,7 @@
 
             <div class="modal-body">
                 <div class="form-horizontal">
-                    <!--montar-formulario Modelo="modelo" Titulo="ViewData["Title"]" Tipo="ipoFormulario.Inserir"></!--montar-formulario -->
-                    
+                    <montar-formulario configuracao="@Model"></montar-formulario>
                 </div>
             </div>
             <div class="modal-footer">

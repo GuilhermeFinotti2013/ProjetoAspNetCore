@@ -11,6 +11,7 @@ namespace ProjetoAspNetCore.Mvc.Infra.TOs
         public string Titulo { get; set; }
         public TipoFormulario TipoDoFormulario { get; set; }
         public object Dado { get; set; }
-        public TOConfiguracaoCampo ConfiguracaoCampo { get; set; }
+        public List<TOConfiguracaoCampo> ConfiguracaoCampos { get; set; }
+        public int TamalhoLabel { get; set; }
     }
 }
