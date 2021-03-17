@@ -13,13 +13,14 @@ namespace ProjetoAspNetCore.Data.ORM
         public CursoDbContext(DbContextOptions<CursoDbContext> options)
             : base(options)
         {
-
+            this.Database.SetCommandTimeout(180);
         }
 
         public DbSet<Paciente> Paciente { get; set; }
         public DbSet<EstadoPaciente> EstadoPaciente { get; set; }
         public DbSet<Generico> Generico { get; set; }
         public DbSet<Cid> Cid { get; set; }
+        public DbSet<Medicamento> Medicamento { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

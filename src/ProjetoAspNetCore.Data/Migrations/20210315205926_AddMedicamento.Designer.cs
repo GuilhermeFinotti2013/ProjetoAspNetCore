@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetoAspNetCore.Data.ORM;
 
 namespace ProjetoAspNetCore.Data.Migrations
 {
     [DbContext(typeof(CursoDbContext))]
-    partial class CursoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210315205926_AddMedicamento")]
+    partial class AddMedicamento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
