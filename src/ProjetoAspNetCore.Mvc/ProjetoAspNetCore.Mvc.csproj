@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProjetoAspNetCore.Aplicacao\ProjetoAspNetCore.Aplicacao.csproj" />
     <ProjectReference Include="..\ProjetoAspNetCore.Data\ProjetoAspNetCore.Data.csproj" />
     <ProjectReference Include="..\ProjetoAspNetCore.Domain\ProjetoAspNetCore.Domain.csproj" />
   </ItemGroup>

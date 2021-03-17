@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Apresentacao", "1.Apresentacao", "{0BBF381F-5EA1-4C51-A3AF-DB2BCA48CB4D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Aplicacao", "2.Aplicacao", "{1868C829-62FD-46DD-8C83-5D089B3899F3}"
-	ProjectSection(SolutionItems) = preProject
-		src\ProjetoAspNetCore.Mvc\bundleconfig.json = src\ProjetoAspNetCore.Mvc\bundleconfig.json
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Dominio", "3.Dominio", "{B8CCA2DB-0B81-4AAF-9D17-6B306EB0EC9B}"
 EndProject
@@ -23,6 +20,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoAspNetCore.Mvc", "src\ProjetoAspNetCore.Mvc\ProjetoAspNetCore.Mvc.csproj", "{EEC90CF1-15A2-49D1-829A-D26E37CD7E44}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoAspNetCore.DomainCore", "src\ProjetoAspNetCore.DomainCore\ProjetoAspNetCore.DomainCore.csproj", "{B8BF3693-B4E1-4158-AF52-ACB60E6FF830}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoAspNetCore.Aplicacao", "src\ProjetoAspNetCore.Aplicacao\ProjetoAspNetCore.Aplicacao.csproj", "{37DCAD58-ED43-453B-8783-C53A577B9618}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +45,10 @@ Global
 		{B8BF3693-B4E1-4158-AF52-ACB60E6FF830}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8BF3693-B4E1-4158-AF52-ACB60E6FF830}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8BF3693-B4E1-4158-AF52-ACB60E6FF830}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37DCAD58-ED43-453B-8783-C53A577B9618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37DCAD58-ED43-453B-8783-C53A577B9618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37DCAD58-ED43-453B-8783-C53A577B9618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37DCAD58-ED43-453B-8783-C53A577B9618}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +59,7 @@ Global
 		{760A5F11-3E8E-4694-9BF1-0FC5DACEC7AD} = {14C0D774-636C-4F28-AC21-63B6E1294499}
 		{EEC90CF1-15A2-49D1-829A-D26E37CD7E44} = {0BBF381F-5EA1-4C51-A3AF-DB2BCA48CB4D}
 		{B8BF3693-B4E1-4158-AF52-ACB60E6FF830} = {B8CCA2DB-0B81-4AAF-9D17-6B306EB0EC9B}
+		{37DCAD58-ED43-453B-8783-C53A577B9618} = {1868C829-62FD-46DD-8C83-5D089B3899F3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0FA92D55-F43D-437C-A2D3-B4D08FC7D0CF}
