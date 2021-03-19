@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ProjetoAspNetCore.Domain.Models.Cid>
+
+@{ ViewData["Title"] = "Cadastro de CID"; }
+
+<vc:cabecalho titulo="SysMed - Controle hospitalar simples" subtitulo="@ViewData["Title"]"></vc:cabecalho>
+
+<div class="row" style="margin-top: 12px;">
+    <div class="col-lg-12">
+        <p>
+            <button class="btn btn-default create" data-toggle="tooltip" data-placement="bottom" title="Adicionar um novo CID" data-original-title="Adicionar um novo genérico">
+                <i class="glyphicon glyphicon-plus-sign"></i>
+            </button>
+            <a asp-controller="Home" asp-action="Dashboard" class="btn btn-default">Home</a>
+        </p>
+
+        <div class="animated fadeInRightBig">
+            <div class="panel panel-primary toggle">
+                <!-- Start .panel -->
+                <div class="panel-heading">
+                    <h4 class="panel-title"><i class="fa fa-magic"></i> MédicalSystem - Cadastro de CIDs</h4>
+                </div>
+                <div class="panel-body">
+                    <listar-dados Items="@Model"></listar-dados>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-style6"
+     id="modalGnerico"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+
+</div>
+
+@section Scripts{
+
+    <script src="~/bundle/dataTables.min.js"></script>
+
+    <script type="text/javascript">$(".details").click(function () {
+            var id = $(this).attr("data-id");
+            $("#modalGnerico").load("/Cid/Details?id=" + id, function () {
+                $("#modalGnerico").modal();
+            });
+        });
+
+        $(".delete").click(function () {
+            var id = $(this).attr("data-id");
+            $("#modalGnerico").load("/Cid/Delete?id=" + id, function () {
+                $("#modalGnerico").modal();
+            });
+        });
+
+        $(".edit").click(function () {
+            var id = $(this).attr("data-id");
+            $("#modalGnerico").load("/Cid/Edit?id=" + id, function () {
+                $("#modalGnerico").modal();
+            });
+        });
+
+        $(".create").click(function () {
+            $("#modalGnerico").load("/Cid/Create", function () {
+                $("#modalGnerico").modal();
+            });
+        });</script>
+    <script>$(document).ready(function () {
+            $('#myTable').DataTable({
+                dom: 'T<"clear">lfrtip',
+                tableTools: {
+                    "sSwfPath": "/myPlugins/copy_csv_xls_pdf.swf"
+                }
+            });
+        });</script>
+}

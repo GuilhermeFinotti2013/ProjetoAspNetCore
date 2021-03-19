@@ -35,8 +35,9 @@ namespace ProjetoAspNetCore.Mvc
             services.AddIdentityConfig(Configuration);
             services.AddMvcAndRazor();
             services.AddDependencyInjectConfig(Configuration);
+            // Prove suporte para Code Page (1252) (Windows-1252)
+            services.AddCodePageProviderNotSupportedForAnsi();
             #endregion
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
