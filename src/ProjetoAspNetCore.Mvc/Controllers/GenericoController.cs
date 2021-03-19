@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetoAspNetCore.Data.ORM;
 using ProjetoAspNetCore.Domain.Models;
@@ -159,6 +160,13 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         private bool GenericoExists(Guid id)
         {
             return _context.Generico.Any(e => e.Id == id);
+        }
+
+
+        [HttpPost]
+        public IActionResult ImportGenerico(IFormFile file)
+        {
+            return View();
         }
     }
 }

@@ -13,10 +13,29 @@ using System.Threading.Tasks;
 
 namespace ProjetoAspNetCore.Mvc.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class ConfigController : Controller
     {
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult MenuConfig()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ImportarCid()
+        {
+            return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult ImportarGenericos()
         {
             return View();
         }

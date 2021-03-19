@@ -4,7 +4,7 @@
             @Html.ActionLink("Config", "Index", "Config", null, new { @class = "btn btn-default" })
         </p>
 
-        <div class="animate fadeInRightBig">
+        <div class="animated fadeInRightBig">
             <div class="panel panel-primary toggle">
                 <div class="panel-heading">
                     <h4 class="panel-title"><i class="fa fa-magic"></i>MedicalSystem - Configurações</h4>
@@ -12,10 +12,8 @@
                 <div class="panel-body">
                     <div class="jumbotron">
                         <a asp-controller="Config" asp-action="ImportMedicamentos" class="btn btn-info">Importar Medicamentos</a>
-                        <a asp-controller="Config" asp-action="" class="btn btn-info">Importar Genérico</a>
-                        <a asp-controller="Config" asp-action="" class="btn btn-info">Importar Cid</a>
-                        <a asp-controller="Config" asp-action="" class="btn btn-info">Importar Bairro</a>
-                        <a asp-controller="Config" asp-action="" class="btn btn-info">Importar Cidade</a>
+                        <a asp-controller="Config" asp-action="ImportarGenericos" class="btn btn-info">Importar Genérico</a>
+                        <a asp-controller="Config" asp-action="ImportarCid" class="btn btn-info">Importar Cid</a>
                     </div>
                 </div>
             </div>
