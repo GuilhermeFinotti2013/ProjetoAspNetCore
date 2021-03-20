@@ -10,6 +10,7 @@ using ProjetoAspNetCore.Aplicacao.Extensions;
 using ProjetoAspNetCore.Domain.Models;
 using ProjetoAspNetCore.Data.ORM;
 using System.Text;
+using X.PagedList;
 
 namespace ProjetoAspNetCore.Mvc.Controllers
 {
@@ -22,9 +23,43 @@ namespace ProjetoAspNetCore.Mvc.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pagina, string ordenacao, string stringBusca)
         {
-            return View(await _context.Cid.AsNoTracking().Where(c => c.CidInternalId < 101).OrderBy(o => o.CidInternalId).ToListAsync());
+            const int itensPorPagina = 8;
+            int numeroPagina = (pagina ?? 1);
+
+            ViewData["ordenacao"] = ordenacao;
+            ViewData["filtroAtual"] = stringBusca;
+
+            var cids = from c in _context.Cid select c;
+
+            #region Filtro
+            if (!string.IsNullOrEmpty(stringBusca))
+            {
+                cids = cids.Where(s => s.Codigo.Contains(stringBusca) || s.Diagnostico.Contains(stringBusca));
+            }
+            #endregion
+
+            #region Ordenação
+            ViewData["OrderByInternalId"] = string.IsNullOrEmpty(ordenacao) ? "CidInternalId_desc" : "";
+            ViewData["OrderByCodigo"] = ordenacao == "Codigo" ? "Codigo_desc" : "Codigo";
+            ViewData["OrderByDiagnostico"] = ordenacao == "Diagnostico" ? "Diagnostico_desc" : "Diagnostico";
+
+            if (string.IsNullOrEmpty(ordenacao))
+            {
+                ordenacao = "CidInternalId";
+            }
+            if (ordenacao.EndsWith("_desc"))
+            {
+                ordenacao = ordenacao.Substring(0, ordenacao.Length - 5);
+                cids = cids.OrderByDescending(x => EF.Property<object>(x, ordenacao));
+            }
+            else
+            {
+                cids = cids.OrderBy(x => EF.Property<object>(x, ordenacao));
+            }
+            #endregion
+            return View(await cids.AsNoTracking().ToPagedListAsync(numeroPagina, itensPorPagina));
         }
 
         [HttpPost]
