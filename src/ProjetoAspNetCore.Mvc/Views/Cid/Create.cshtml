@@ -1,0 +1,44 @@
+﻿@using ProjetoAspNetCore.Domain.Models
+@using ProjetoAspNetCore.Mvc.Infra.Enums
+@using ProjetoAspNetCore.Mvc.Infra.TOs 
+
+@{ ViewBag.Title = "Adicionar novo Cid";
+    Layout = "";
+    var modelo = new Cid();
+    TOConfiguracaoFormulario configuracaoFormulario = new TOConfiguracaoFormulario()
+    {
+        Titulo = ViewBag.Title,
+        TipoDoFormulario = TipoFormulario.Inserir,
+        Dado = modelo,
+        TamalhoLabel = 2
+    };
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+
+         @using (Html.BeginForm())
+         {
+            @Html.AntiForgeryToken()
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">MedicalSystem</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <montar-formulario configuracao="@configuracaoFormulario"></montar-formulario>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" value="Adicionar" class="btn btn-success" />
+                <input type="button" value="Cancelar" class="btn btn-default" data-dismiss="modal" />
+            </div>
+         }
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

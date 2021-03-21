@@ -121,7 +121,7 @@
 </div>
 
 <div class="modal fade modal-style6"
-     id="modalGnerico"
+     id="modalCid"
      tabindex="-1"
      role="dialog"
      aria-labelledby="myModalLabel"
@@ -134,37 +134,28 @@
     <script type="text/javascript">
     $(".details").click(function () {
             var id = $(this).attr("data-id");
-            $("#modalGnerico").load("/Cid/Details?id=" + id, function () {
-                $("#modalGnerico").modal();
+            $("#modalCid").load("/Cid/Details?id=" + id, function () {
+                $("#modalCid").modal();
             });
         });
 
         $(".delete").click(function () {
             var id = $(this).attr("data-id");
-            $("#modalGnerico").load("/Cid/Delete?id=" + id, function () {
-                $("#modalGnerico").modal();
+            $("#modalCid").load("/Cid/Delete?id=" + id, function () {
+                $("#modalCid").modal();
             });
         });
 
         $(".edit").click(function () {
             var id = $(this).attr("data-id");
-            $("#modalGnerico").load("/Cid/Edit?id=" + id, function () {
-                $("#modalGnerico").modal();
+            $("#modalCid").load("/Cid/Edit?id=" + id, function () {
+                $("#modalCid").modal();
             });
         });
 
         $(".create").click(function () {
-            $("#modalGnerico").load("/Cid/Create", function () {
-                $("#modalGnerico").modal();
-            });
-        });</script>
-    <script>
-    $(document).ready(function () {
-            $('#myTable').DataTable({
-                dom: 'T<"clear">lfrtip',
-                tableTools: {
-                    "sSwfPath": "/myPlugins/copy_csv_xls_pdf.swf"
-                }
+            $("#modalCid").load("/Cid/Create", function () {
+                $("#modalCid").modal();
             });
         });</script>
 }
