@@ -22,5 +22,10 @@ namespace ProjetoAspNetCore.Mvc.Extensions.Identity
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [DataType(DataType.Date)]
         public DateTime DataNascimento { get; set; }
+
+        [ProtectedPersonalData]
+        [DataType(DataType.Text)]
+        [StringLength(255, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres", MinimumLength = 21)]
+        public string ImgProfilePath { get; set; }
     }
 }

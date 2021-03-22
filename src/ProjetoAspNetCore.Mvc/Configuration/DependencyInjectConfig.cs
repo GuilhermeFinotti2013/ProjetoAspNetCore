@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProjetoAspNetCore.Mvc.Extensions.Identity.Services;
+using ProjetoAspNetCore.Mvc.Identity.Services;
+using ProjetoAspNetCore.Mvc.Infra;
 //using ProjetoAspNetCore.Mvc.Extensions.Filtros;
 
 namespace ProjetoAspNetCore.Mvc.Configuration
@@ -16,6 +18,7 @@ namespace ProjetoAspNetCore.Mvc.Configuration
             services.AddScoped((context) => Logger.Factory.Get());
             //          services.AddScoped<AuditoriaFilter>();
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IUnitOfUpload, UnitOfUpload>();
             services.Configure<AuthMessageSenderOptions>(configuration);
             return services;
         }

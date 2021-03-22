@@ -59,6 +59,11 @@ namespace ProjetoAspNetCore.Mvc.Areas.Identity.Pages.Account.Manage
             [Required(ErrorMessage = "O campo {0} é obrigatório")]
             [DataType(DataType.Date)]
             public DateTime DataNascimento { get; set; }
+
+            [ProtectedPersonalData]
+            [DataType(DataType.Text)]
+            [StringLength(255, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres", MinimumLength = 21)]
+            public string ImgProfilePath { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -94,7 +99,8 @@ namespace ProjetoAspNetCore.Mvc.Areas.Identity.Pages.Account.Manage
                 PhoneNumber = telefone,
                 Apelido = user.Apelido,
                 NomeCompleto = user.NomeCompleto,
-                DataNascimento = user.DataNascimento
+                DataNascimento = user.DataNascimento,
+                ImgProfilePath = user.ImgProfilePath
             };
 
             IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
@@ -138,6 +144,10 @@ namespace ProjetoAspNetCore.Mvc.Areas.Identity.Pages.Account.Manage
             if (Input.DataNascimento != user.DataNascimento)
             {
                 user.DataNascimento = Input.DataNascimento;
+            }
+            if (Input.ImgProfilePath != user.ImgProfilePath)
+            {
+                user.ImgProfilePath = Input.ImgProfilePath;
             }
 
             await _signInManager.RefreshSignInAsync(user);
