@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjetoAspNetCore.Mvc.Extensions.Identity;
+using ProjetoAspNetCore.Mvc.Infra;
 
 namespace ProjetoAspNetCore.Mvc.Areas.Identity.Pages.Account.Manage
 {
@@ -14,13 +16,16 @@ namespace ProjetoAspNetCore.Mvc.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IUnitOfUpload _unitOfUpload;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            IUnitOfUpload unitOfUpload)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _unitOfUpload = unitOfUpload;
         }
 
         public string Username { get; set; }
@@ -108,7 +113,7 @@ namespace ProjetoAspNetCore.Mvc.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(IFormFile file)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -150,8 +155,15 @@ namespace ProjetoAspNetCore.Mvc.Areas.Identity.Pages.Account.Manage
                 user.ImgProfilePath = Input.ImgProfilePath;
             }
 
+            if (file != null)
+            {
+                _unitOfUpload.UploadImagem(file);
+                user.ImgProfilePath = file.FileName;
+            }
+
+            await _userManager.UpdateAsync(user);
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Seu perfil foi alterado com sucesso!";
             return RedirectToPage();
         }
     }

@@ -15,6 +15,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.4" />
 
 
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
@@ -26,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProjetoAspNetCore.Aplicacao\ProjetoAspNetCore.Aplicacao.csproj" />
+    <ProjectReference Include="..\ProjetoAspNetCore.CrossCutting\ProjetoAspNetCore.CrossCutting.csproj" />
     <ProjectReference Include="..\ProjetoAspNetCore.Data\ProjetoAspNetCore.Data.csproj" />
     <ProjectReference Include="..\ProjetoAspNetCore.Domain\ProjetoAspNetCore.Domain.csproj" />
   </ItemGroup>
