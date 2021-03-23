@@ -59,197 +59,32 @@
                                     <div class="wrapper">
                                         <br />
                                         <div class="row text-md-center text-sm-center text-xs-center">
-                                            <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
-                                                <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                                                    {
-                                                        <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                            <img src="/images/dashboard.png" class="card-img-top" style="width: 100%; height: auto" />
-                                                        </a>
-                                                        <div class="card-img-overlay">
+                                            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                                            {
+                                                <index-home titulo=".:: Entrar-Admin ::." imagem="dashboard.png" controlador="Home" visualizacao="Dashboard"></index-home> }
+                                            else
+                                            {
+                                                <index-home titulo=".:: Entrar-Comum ::." imagem="dashboard.png" controlador="Home" visualizacao="BoxInit"></index-home>
+                                            }                                                
+                                            <index-home titulo="Registro de Pacientes" imagem="atualizacao_cadastral.png" controlador="Home" visualizacao="Paciente"></index-home>
+                                            <index-home titulo="Agenda" imagem="calendar.png" controlador="AgendaCalendar" visualizacao="Index"></index-home>
+                                            <index-home titulo="Chamada Médico" imagem="examesdeimagens.png" controlador="Home" visualizacao="ChamadaMedico"></index-home>
 
-                                                            <div style="text-align: center">
-                                                                <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                                    <h4 class="card-title">.:: Entrar-Admin ::.</h4>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a asp-controller="Home" asp-action="BoxInit" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                            <img src="/images/dashboard.png" class="card-img-top" style="width: 100%; height: auto" />
-                                                        </a>
-                                                        <div class="card-img-overlay">
-
-                                                            <div style="text-align: center">
-                                                                <a asp-controller="Home" asp-action="BoxInit" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                                    <h4 class="card-title">.:: Entrar-Comum ::.</h4>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    }
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
-                                                <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                        <img src="/images/atualizacao_cadastral.png" class="card-img-top" style="width: 100%; height: auto" />
-                                                    </a>
-                                                    <div class="card-img-overlay">
-                                                        <div style="text-align: center">
-                                                            <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                                <h4 class="card-title">Registro de Pacientes</h4>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
-                                                <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                        <img src="/images/calendar.png" class="card-img-top" style="width: 100%; height: auto" />
-                                                    </a>
-                                                    <div class="card-img-overlay">
-                                                        <div style="text-align: center">
-                                                            <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                                <h4 class="card-title">Agenda</h4>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
-                                                <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                        <img src="/images/examesdeimagens.png" class="card-img-top" style="width: 100%; height: auto" />
-                                                    </a>
-                                                    <div class="card-img-overlay">
-                                                        <div style="text-align: center">
-                                                            <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                                <h4 class="card-title">Chamada Médico</h4>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row text-center">
-                                            <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
-                                                <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                        <img src="/images/evolucao.png" class="card-img-top" style="width: 100%; height: auto" />
-                                                    </a>
-                                                    <div class="card-img-overlay">
-                                                        <div style="text-align: center">
-                                                            <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                                <h4 class="card-title">Prontuario</h4>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
-                                                <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                        <img src="/images/prescricao.png" class="card-img-top" style="width: 100%; height: auto" />
-                                                    </a>
-                                                    <div class="card-img-overlay">
-                                                        <div style="text-align: center">
-                                                            <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                                <h4 class="card-title">Unidade Geografica</h4>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
-                                                <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                        <img src="/images/sinais_vitais.png" class="card-img-top" style="width: 100%; height: auto" />
-                                                    </a>
-                                                    <div class="card-img-overlay">
-                                                        <div style="text-align: center">
-                                                            <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                                <h4 class="card-title">Base de Conhecimentos</h4>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
-                                                <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                        <img src="/images/mural.png" class="card-img-top" style="width: 100%; height: auto" />
-                                                    </a>
-                                                    <div class="card-img-overlay">
-                                                        <div style="text-align: center">
-                                                            <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                                <h4 class="card-title">Mural de Avisos</h4>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <div class="row text-center">
-                                            <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
-                                                <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                        <img src="/images/interacao_medicamentosa.png" class="card-img-top" style="width: 100%; height: auto" />
-                                                    </a>
-                                                    <div class="card-img-overlay">
-                                                        <div style="text-align: center">
-                                                            <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                                <h4 class="card-title">Int. Medicamentosas</h4>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
-                                                <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                        <img src="/images/niveldeacesso.png" class="card-img-top" style="width: 100%; height: auto" />
-                                                    </a>
-                                                    <div class="card-img-overlay">
-                                                        <div style="text-align: center">
-                                                            <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                                <h4 class="card-title">Controle de Acesso</h4>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
-                                                <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                        <img src="/images/users.png" class="card-img-top" style="width: 100%; height: auto" />
-                                                    </a>
-                                                    <div class="card-img-overlay">
-                                                        <div style="text-align: center">
-                                                            <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                                <h4 class="card-title">Adm de Usuários</h4>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-sx-12" style="padding-bottom: 15px;">
-                                                <div class="card card-inverse text-md-center text-sm-center text-xs-center">
-                                                    <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                        <img src="/images/config.png" class="card-img-top" style="width: 100%; height: auto" />
-                                                    </a>
-                                                    <div class="card-img-overlay">
-                                                        <div style="text-align: center">
-                                                            <a asp-controller="Home" asp-action="Dashboard" style="text-decoration: none; color: #ed5353; font-size: 16px;">
-                                                                <h4 class="card-title">Configurações</h4>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <index-home titulo="Prontuários" imagem="evolucao.png" controlador="Prontuario" visualizacao="ListaProntuario"></index-home>
+                                            <index-home titulo="Unidade Geográfica" imagem="prescricao.png" controlador="UniGeog" visualizacao="Listar"></index-home>
+                                            <index-home titulo="Base de Conhecimento" imagem="sinais_vitais.png" controlador="Home" visualizacao="BaseDeConhecimento"></index-home>
+                                            <index-home titulo="Mural de Avisos" imagem="mural.png" controlador="Mural" visualizacao="Index"></index-home>
+                                        </div>
+
+                                        <div class="row text-center">
+                                            <index-home titulo="Int. Medicamentosas" imagem="interacao_medicamentosa.png" controlador="Home" visualizacao="InteracaoMedicamentosa"></index-home>
+                                            <index-home titulo="Controle de Acesso" imagem="niveldeacesso.png" controlador="RolesAdmin" visualizacao="Index"></index-home>
+                                            <index-home titulo="Adm de Usuários" imagem="users.png" controlador="UsersAdmin" visualizacao="Index"></index-home>
+                                            <index-home titulo="Configurações" imagem="config.png" controlador="Configuracoes" visualizacao="Index"></index-home>
+
                                         </div>
                                     </div>
                                 </div>
