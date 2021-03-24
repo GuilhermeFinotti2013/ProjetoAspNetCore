@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ProjetoAspNetCore.Mvc.Infra.TOs;
+using ProjetoAspNetCore.Domain.Interfaces.Entidades;
 
 namespace ProjetoAspNetCore.Mvc.Controllers
 {
@@ -18,31 +19,29 @@ namespace ProjetoAspNetCore.Mvc.Controllers
     public class PacienteController : Controller
     {
         private readonly CursoDbContext _context;
+        private readonly IRepositoryDomainPaciente _repositorioPaciente;
 
-        public PacienteController(CursoDbContext context)
+        public PacienteController(CursoDbContext context, IRepositoryDomainPaciente repositorioPaciente)
         {
             _context = context;
+            _repositorioPaciente = repositorioPaciente;
         }
 
         // GET: Paciente
         public async Task<IActionResult> Index()
         {
-            var registrosObtidos = _context.Paciente.Include(e => e.EstadoPaciente).ToList();
-            List<PacienteViewModel> listaExibicao = ConverterParaViewModels(registrosObtidos);
-            
-            return View(listaExibicao);
+            return View(await _repositorioPaciente.ListarPacientesComEstado());
         }
 
         // GET: Paciente/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(Guid id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _context.Paciente.Include(x => x.EstadoPaciente)
-                .AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
+            var paciente = await _repositorioPaciente.SelecionarPorId(id);
             if (paciente == null)
             {
                 return NotFound();

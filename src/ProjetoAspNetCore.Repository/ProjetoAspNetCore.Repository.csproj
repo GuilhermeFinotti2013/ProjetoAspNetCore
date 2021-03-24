@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ProjetoAspNetCore.Data\ProjetoAspNetCore.Data.csproj" />
     <ProjectReference Include="..\ProjetoAspNetCore.DomainCore\ProjetoAspNetCore.DomainCore.csproj" />
+    <ProjectReference Include="..\ProjetoAspNetCore.Domain\ProjetoAspNetCore.Domain.csproj" />
   </ItemGroup>
 
 </Project>

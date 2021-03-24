@@ -30,6 +30,7 @@
     <ProjectReference Include="..\ProjetoAspNetCore.CrossCutting\ProjetoAspNetCore.CrossCutting.csproj" />
     <ProjectReference Include="..\ProjetoAspNetCore.Data\ProjetoAspNetCore.Data.csproj" />
     <ProjectReference Include="..\ProjetoAspNetCore.Domain\ProjetoAspNetCore.Domain.csproj" />
+    <ProjectReference Include="..\ProjetoAspNetCore.Repository\ProjetoAspNetCore.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>

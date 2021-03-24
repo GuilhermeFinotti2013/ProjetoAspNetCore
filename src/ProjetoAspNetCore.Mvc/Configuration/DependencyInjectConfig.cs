@@ -11,6 +11,8 @@ using ProjetoAspNetCore.Mvc.Infra;
 using System;
 using Microsoft.AspNetCore.Identity;
 using ProjetoAspNetCore.Mvc.Extensions.Identity;
+using ProjetoAspNetCore.Domain.Interfaces.Entidades;
+using ProjetoAspNetCore.Repository.Entidades;
 //using ProjetoAspNetCore.Mvc.Extensions.Filtros;
 
 namespace ProjetoAspNetCore.Mvc.Configuration
@@ -23,6 +25,11 @@ namespace ProjetoAspNetCore.Mvc.Configuration
             services.AddScoped((context) => Logger.Factory.Get());
             //          services.AddScoped<AuditoriaFilter>();
             services.AddTransient<IEmailSender, EmailSender>();
+
+            #region Repositórios
+            services.AddScoped<IRepositoryDomainPaciente, PacienteRepositorio>();
+            #endregion
+
             services.AddTransient<IUnitOfUpload, UnitOfUpload>();
             #region Mantem o estado do contexto Http por toda a aplicação
             // =====/ Mantem o estado do contexto Http por toda a aplicação === //
