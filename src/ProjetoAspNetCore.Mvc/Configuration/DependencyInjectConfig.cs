@@ -28,7 +28,7 @@ namespace ProjetoAspNetCore.Mvc.Configuration
             // =====/ Mantem o estado do contexto Http por toda a aplicação === //
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             // ================================================================ //
-            //services.AddScoped<IUsuarioNoContexto, UsuarioAspNet>();
+            ////services.AddScoped<IUsuarioNoContexto, UsuarioAspNet>();
             // ================================================================ //
 
             // =====/ Adicionar Claims para HttpContext >> toda a Applications ================ //
