@@ -14,5 +14,6 @@ namespace ProjetoAspNetCore.DomainCore.Base
         Task Inserir(TEntity entity);
         Task<IEnumerable<TEntity>> SelecionarTodos(Expression<Func<TEntity, bool>> quando = null);
         Task<TEntity> SelecionarPorId(TKey id);
+        Task<int> SaveAsync();
     }
 }

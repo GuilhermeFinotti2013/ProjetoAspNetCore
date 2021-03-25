@@ -3,16 +3,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProjetoAspNetCore.CrossCutting.Helpers;
-using ProjetoAspNetCore.Domain.Interfaces;
+using ProjetoAspNetCore.Aplicacao.Servicos;
+using ProjetoAspNetCore.Domain.Interfaces.Entidades;
 using ProjetoAspNetCore.Mvc.Extensions.Identity.Services;
 using ProjetoAspNetCore.Mvc.Identity.Services;
 using ProjetoAspNetCore.Mvc.Infra;
-using System;
-using Microsoft.AspNetCore.Identity;
-using ProjetoAspNetCore.Mvc.Extensions.Identity;
-using ProjetoAspNetCore.Domain.Interfaces.Entidades;
-using ProjetoAspNetCore.Repository.Entidades;
 //using ProjetoAspNetCore.Mvc.Extensions.Filtros;
 
 namespace ProjetoAspNetCore.Mvc.Configuration
@@ -27,7 +22,7 @@ namespace ProjetoAspNetCore.Mvc.Configuration
             services.AddTransient<IEmailSender, EmailSender>();
 
             #region Repositórios
-            services.AddScoped<IRepositoryDomainPaciente, PacienteRepositorio>();
+            services.AddScoped<IRepositoryDomainPaciente, PacienteService>();
             #endregion
 
             services.AddTransient<IUnitOfUpload, UnitOfUpload>();

@@ -23,13 +23,13 @@ namespace ProjetoAspNetCore.Repository.Base
         public virtual async Task Atualizar(TEntity entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
-            await this.Salvar();
+            await this.SaveAsync();
         }
 
         public virtual async Task Excluir(TEntity entity)
         {
             this._context.Entry(entity).State = EntityState.Deleted;
-            await this.Salvar();
+            await this.SaveAsync();
         }
 
         public virtual async Task ExcluirPorId(TKey id)
@@ -41,7 +41,7 @@ namespace ProjetoAspNetCore.Repository.Base
         public virtual async Task Inserir(TEntity entity)
         {
             this._context.Set<TEntity>().Add(entity);
-            await this.Salvar();
+            await this.SaveAsync();
         }
 
         public async Task<TEntity> SelecionarPorId(TKey id)
@@ -58,15 +58,14 @@ namespace ProjetoAspNetCore.Repository.Base
             return await this._context.Set<TEntity>().AsNoTracking().Where(quando).ToListAsync();
         }
 
-        private async Task Salvar()
-        {
-            await _context.SaveChangesAsync();
-        }
-
         public void Dispose()
         {
             _context?.DisposeAsync();
         }
 
+        public virtual async Task<int> SaveAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
     }
 }

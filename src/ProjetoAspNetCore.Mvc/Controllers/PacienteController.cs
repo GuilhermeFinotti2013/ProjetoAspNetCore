@@ -79,8 +79,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(paciente);
-                await _context.SaveChangesAsync();
+                await _repositorioPaciente.Inserir(paciente);
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.EstadoPaciente = new SelectList(_context.EstadoPaciente, "Id", "Descricao",
@@ -89,14 +88,14 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         }
 
         // GET: Paciente/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(Guid id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _context.Paciente.FindAsync(id);
+            var paciente = await _repositorioPaciente.SelecionarPorId(id); ;
             if (paciente == null)
             {
                 return NotFound();
@@ -122,8 +121,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
             {
                 try
                 {
-                    _context.Update(paciente);
-                    await _context.SaveChangesAsync();
+                    await _repositorioPaciente.Atualizar(paciente);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -144,15 +142,14 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         }
 
         // GET: Paciente/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _context.Paciente.Include(x => x.EstadoPaciente).AsNoTracking()
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var paciente = await _repositorioPaciente.SelecionarPorId(id);
             if (paciente == null)
             {
                 return NotFound();
@@ -167,9 +164,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var paciente = await _context.Paciente.FindAsync(id);
-            _context.Paciente.Remove(paciente);
-            await _context.SaveChangesAsync();
+            await _repositorioPaciente.ExcluirPorId(id);
             return RedirectToAction(nameof(Index));
         }
 
