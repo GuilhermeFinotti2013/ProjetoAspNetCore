@@ -30,7 +30,8 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         // GET: Paciente
         public async Task<IActionResult> Index()
         {
-            return View(await _repositorioPaciente.ListarPacientesComEstado());
+            var dados = await _repositorioPaciente.ListarPacientesComEstado();
+            return View(ConverterParaViewModels(dados.ToList()));
         }
 
         // GET: Paciente/Details/5

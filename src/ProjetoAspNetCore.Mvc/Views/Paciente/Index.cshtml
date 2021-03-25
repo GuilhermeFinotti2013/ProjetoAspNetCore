@@ -1,5 +1,5 @@
 ﻿@using ProjetoAspNetCore.Mvc.Extensions.ExtensionsMethods
-@model IEnumerable<ProjetoAspNetCore.Domain.Models.Paciente>
+@model IEnumerable<ProjetoAspNetCore.Mvc.ViewModel.PacienteViewModel>
 
 @{
     ViewData["Title"] = "Lista de pacientes";
@@ -20,82 +20,11 @@
 
         <div class="animated fadeInRightBig">
             <div class="panel panel-primary toggle">
-                <!-- Start .panel -->
                 <div class="panel-heading">
                     <h4 class="panel-title"><i class="fa fa-magic"></i> MédicalSystem - Cadastro de Genéricos</h4>
                 </div>
                 <div class="panel-body">
-                    @*<listar-dados Items="@Model"></listar-dados>*@
-
-                    <table class="table table-bordered table-hover">
-                        <thead class="dark">
-                            <tr>
-
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Nome)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.DataNascimento)
-                                </th>
-
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Ativo)
-                                </th>
-
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TipoPaciente)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Sexo)
-                                </th>
-
-                                <th>
-                                    @Html.DisplayNameFor(model => model.EstadoPaciente.Descricao)
-                                </th>
-
-                                <th>Ação</th>
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                //var dataNascPtBr = item.DataNascimento.ToBrazilianDate();
-                                var dateTimeNascPtBr = item.DataNascimento.ToBrazilianDate();
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
-                    <td>
-                        @dateTimeNascPtBr
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ativo)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TipoPaciente)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Sexo)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EstadoPaciente.Descricao)
-                    </td>
-
-                    <td class="text-right">
-                        <a asp-controller="Paciente" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pencil-square fa-2x" title="Editar Paciente"></span> </a>
-                        <a asp-controller="Paciente" asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-search fa-2x" title="Detalhes Paciente"></span> </a>
-                        <a asp-controller="Paciente" asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash fa-2x" title="Excluir Paciente"></span> </a>
-                    </td>
-
-                </tr>            }
-                        </tbody>
-                    </table>
-
+                    <listar-dados Items="@Model"></listar-dados>
                 </div>
             </div>
         </div>
