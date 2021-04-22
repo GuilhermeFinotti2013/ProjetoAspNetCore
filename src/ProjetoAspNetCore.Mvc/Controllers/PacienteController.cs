@@ -12,6 +12,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using ProjetoAspNetCore.Mvc.Infra.TOs;
 using ProjetoAspNetCore.Domain.Interfaces.Entidades;
+using System.Text;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ProjetoAspNetCore.Mvc.Controllers
 {
@@ -83,9 +85,20 @@ namespace ProjetoAspNetCore.Mvc.Controllers
                 await _repositorioPaciente.Inserir(paciente);
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.EstadoPaciente = new SelectList(_context.EstadoPaciente, "Id", "Descricao",
-                paciente.EstadoPacienteId);
-            return View(paciente);
+            else
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (ModelError error in modelState.Errors)
+                    {
+                        sb.Append(error.ErrorMessage + "\n");
+                    }
+                }
+                TempData["Errors"] = sb.ToString();
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Paciente/Edit/5

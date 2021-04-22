@@ -24,6 +24,13 @@
                     <h4 class="panel-title"><i class="fa fa-magic"></i> MédicalSystem - Cadastro de Genéricos</h4>
                 </div>
                 <div class="panel-body">
+                    @if (TempData["Errors"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @TempData["Errors"]
+                        </div>
+                    }
+
                     <listar-dados Items="@Model"></listar-dados>
                 </div>
             </div>
