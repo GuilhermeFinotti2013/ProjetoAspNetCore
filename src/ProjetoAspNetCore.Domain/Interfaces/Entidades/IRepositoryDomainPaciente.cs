@@ -11,5 +11,8 @@ namespace ProjetoAspNetCore.Domain.Interfaces.Entidades
     {
         Task<IEnumerable<Paciente>> ListarPacientes();
         Task<IEnumerable<Paciente>> ListarPacientesComEstado();
+        List<EstadoPaciente> ListarEstadosPaciente();
+        Task<Paciente> ObterPacienteComEstadoPaciente(Guid pacienteId);
+        bool TemPaciente(Guid pacienteId);
     }
 }

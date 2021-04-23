@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ProjetoAspNetCore.Data.ORM;
 using ProjetoAspNetCore.Domain.Models;
 using ProjetoAspNetCore.Mvc.Infra.Enums;
 using ProjetoAspNetCore.Mvc.ViewModel;
@@ -20,12 +19,10 @@ namespace ProjetoAspNetCore.Mvc.Controllers
     //    [Authorize(Roles = "Admin")]
     public class PacienteController : Controller
     {
-        private readonly CursoDbContext _context;
         private readonly IRepositoryDomainPaciente _repositorioPaciente;
 
-        public PacienteController(CursoDbContext context, IRepositoryDomainPaciente repositorioPaciente)
+        public PacienteController(IRepositoryDomainPaciente repositorioPaciente)
         {
-            _context = context;
             _repositorioPaciente = repositorioPaciente;
         }
 
@@ -44,7 +41,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
                 return NotFound();
             }
 
-            var paciente = await _repositorioPaciente.SelecionarPorId(id);
+            var paciente = await _repositorioPaciente.ObterPacienteComEstadoPaciente(id);
             if (paciente == null)
             {
                 return NotFound();
@@ -67,7 +64,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
             configuracaoFormulario.ConfiguracaoCampos.Add(new TOConfiguracaoCampo("TipoPaciente", TipoCampo.Combo,
                             ConversorDeEnuns.EnumParaSelectItem(TipoEnunsConvertiveis.TipoPaciente)));
             configuracaoFormulario.ConfiguracaoCampos.Add(new TOConfiguracaoCampo("EstadoPacienteId", TipoCampo.Combo,
-                            EstadoPacientesParaSelectItens(_context.EstadoPaciente.ToList())));
+                            EstadoPacientesParaSelectItens(_repositorioPaciente.ListarEstadosPaciente())));
             configuracaoFormulario.TamalhoLabel = 3;
 
             return View(configuracaoFormulario);
@@ -102,19 +99,19 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         }
 
         // GET: Paciente/Edit/5
-        public async Task<IActionResult> Edit(Guid id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
-            if (id == null)
+            if (id.Value == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _repositorioPaciente.SelecionarPorId(id); ;
+            var paciente = await _repositorioPaciente.SelecionarPorId(id.Value); 
             if (paciente == null)
             {
                 return NotFound();
             }
-            ViewBag.EstadoPaciente = new SelectList(_context.EstadoPaciente, "Id", "Descricao",
+            ViewBag.EstadoPaciente = new SelectList(_repositorioPaciente.ListarEstadosPaciente(), "Id", "Descricao",
                 paciente.EstadoPacienteId);
             return View(paciente);
         }
@@ -150,7 +147,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.EstadoPaciente = new SelectList(_context.EstadoPaciente, "Id", "Descricao",
+            ViewBag.EstadoPaciente = new SelectList(_repositorioPaciente.ListarEstadosPaciente(), "Id", "Descricao",
                 paciente.EstadoPacienteId);
             return View(paciente);
         }
@@ -163,7 +160,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
                 return NotFound();
             }
 
-            var paciente = await _repositorioPaciente.SelecionarPorId(id);
+            var paciente = await _repositorioPaciente.ObterPacienteComEstadoPaciente(id);
             if (paciente == null)
             {
                 return NotFound();
@@ -184,7 +181,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
 
         private bool PacienteExists(Guid id)
         {
-            return _context.Paciente.Any(e => e.Id == id);
+            return _repositorioPaciente.TemPaciente(id);
         }
 
         #region Métodos auxiliares
