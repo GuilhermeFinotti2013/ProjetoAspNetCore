@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoAspNetCore.DomainCore.Base
 {
-    public interface IDomainGenericRepository<TEntity, TKey> : IDisposable where TEntity : class
+    public interface IRepository<TEntity, TKey> : IDisposable where TEntity : class
     {
         Task Atualizar(TEntity entity);
         Task Excluir(TEntity entity);

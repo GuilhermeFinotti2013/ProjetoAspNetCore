@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace ProjetoAspNetCore.Repository.Base
 {
-    public abstract class RepositorioGenerico<TEntity, TKey> : IDomainGenericRepository<TEntity, TKey> where TEntity : class, new()
+    public abstract class RepositoryGeneric<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, new()
     {
         protected CursoDbContext _context;
 
-        protected RepositorioGenerico(CursoDbContext context)
+        protected RepositoryGeneric(CursoDbContext context)
         {
             this._context = context;
         }

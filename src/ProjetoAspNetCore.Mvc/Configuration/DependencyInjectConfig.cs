@@ -1,10 +1,14 @@
 ﻿using KissLog;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProjetoAspNetCore.Aplicacao.Servicos;
-using ProjetoAspNetCore.Domain.Interfaces.Entidades;
+using ProjetoAspNetCore.Aplicacao.Repository;
+using ProjetoAspNetCore.CrossCutting.Helpers;
+using ProjetoAspNetCore.Domain.Interfaces;
+using ProjetoAspNetCore.Domain.Interfaces.Repository;
+using ProjetoAspNetCore.Mvc.Extensions.Identity;
 using ProjetoAspNetCore.Mvc.Extensions.Identity.Services;
 using ProjetoAspNetCore.Mvc.Identity.Services;
 using ProjetoAspNetCore.Mvc.Infra;
@@ -18,23 +22,23 @@ namespace ProjetoAspNetCore.Mvc.Configuration
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped((context) => Logger.Factory.Get());
-            //          services.AddScoped<AuditoriaFilter>();
+             //         services.AddScoped<AuditoriaFilter>();
             services.AddTransient<IEmailSender, EmailSender>();
 
             #region Repositórios
-            services.AddScoped<IRepositoryDomainPaciente, PacienteService>();
+            services.AddScoped<PacienteRepository, PacienteRepository>();
             #endregion
 
             services.AddTransient<IUnitOfUpload, UnitOfUpload>();
             #region Mantem o estado do contexto Http por toda a aplicação
             // =====/ Mantem o estado do contexto Http por toda a aplicação === //
-            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             // ================================================================ //
-            ////services.AddScoped<IUsuarioNoContexto, UsuarioAspNet>();
+            services.AddScoped<IUsuarioNoContexto, UsuarioAspNet>();
             // ================================================================ //
 
             // =====/ Adicionar Claims para HttpContext >> toda a Applications ================ //
-            //services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, UserClaimsService>();
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, UserClaimsService>();
             // =====
             #endregion
             services.Configure<AuthMessageSenderOptions>(configuration);

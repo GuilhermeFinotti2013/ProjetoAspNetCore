@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ProjetoAspNetCore.Mvc.Infra.TOs;
-using ProjetoAspNetCore.Domain.Interfaces.Entidades;
+using ProjetoAspNetCore.Domain.Interfaces.Repository;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -19,9 +19,9 @@ namespace ProjetoAspNetCore.Mvc.Controllers
     //    [Authorize(Roles = "Admin")]
     public class PacienteController : Controller
     {
-        private readonly IRepositoryDomainPaciente _repositorioPaciente;
+        private readonly IPacienteRepository _repositorioPaciente;
 
-        public PacienteController(IRepositoryDomainPaciente repositorioPaciente)
+        public PacienteController(IPacienteRepository repositorioPaciente)
         {
             _repositorioPaciente = repositorioPaciente;
         }
@@ -90,7 +90,14 @@ namespace ProjetoAspNetCore.Mvc.Controllers
                 {
                     foreach (ModelError error in modelState.Errors)
                     {
-                        sb.Append(error.ErrorMessage + "\n");
+                        if (error.ErrorMessage == "The value '' is invalid.")
+                        {
+                            sb.AppendLine($"O valor informado para o campo é inválido!");
+                        }
+                        else
+                        {
+                            sb.Append(error.ErrorMessage + "\n");
+                        }
                     }
                 }
                 TempData["Errors"] = sb.ToString();
@@ -177,6 +184,21 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         {
             await _repositorioPaciente.ExcluirPorId(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> ReportForEstadoPaciente(Guid? id)
+        {
+            if (id.Value == null)
+            {
+                return NotFound();
+            }
+
+            var pacientesPorEstado = await _repositorioPaciente.ObterPacientesPorEstadoPaciente(id.Value);
+            if (pacientesPorEstado == null)
+            {
+                return NotFound();
+            }
+            return View(pacientesPorEstado);
         }
 
         private bool PacienteExists(Guid id)
