@@ -1,28 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="KissLog.AspNetCore" Version="4.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.12" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.12" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.12" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.12">
+    <PackageReference Include="KissLog.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.7" />
 
 
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
-    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.0.96" />
-    <PackageReference Include="SendGrid" Version="9.22.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.113" />
+    <PackageReference Include="SendGrid" Version="9.23.2" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
-    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.0.7" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,23 +36,6 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="wwwroot\importFiles\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="bin\Debug\netcoreapp3.1\Csv\Bairro.CSV" />
-    <None Include="bin\Debug\netcoreapp3.1\Csv\BairroUtf8.CSV" />
-    <None Include="bin\Debug\netcoreapp3.1\Csv\Cid.CSV" />
-    <None Include="bin\Debug\netcoreapp3.1\Csv\Cidade.CSV" />
-    <None Include="bin\Debug\netcoreapp3.1\Csv\CidadeUtf8.CSV" />
-    <None Include="bin\Debug\netcoreapp3.1\Csv\CidUtf8.CSV" />
-    <None Include="bin\Debug\netcoreapp3.1\Csv\Generico.CSV" />
-    <None Include="bin\Debug\netcoreapp3.1\Csv\GenericoUtf8.CSV" />
-    <None Include="bin\Debug\netcoreapp3.1\Csv\Medicamentos.CSV" />
-    <None Include="bin\Debug\netcoreapp3.1\Csv\MedicamentosUtf8.CSV" />
-    <None Include="bin\Debug\netcoreapp3.1\Csv\UF.CSV" />
-    <None Include="bin\Debug\netcoreapp3.1\Csv\UFUtf8.CSV" />
-    <None Include="bin\Debug\netcoreapp3.1\Csv\UnidadeGeografica.CSV" />
-    <None Include="bin\Debug\netcoreapp3.1\Csv\UnidadeGeograficaUtf8.CSV" />
   </ItemGroup>
 
 </Project>

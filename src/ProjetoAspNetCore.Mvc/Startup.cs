@@ -30,6 +30,7 @@ namespace ProjetoAspNetCore.Mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             #region Utilizado métodos de extensão de IServiceCollection;
             services.AddDbContextConfig(Configuration);
             services.AddIdentityConfig(Configuration);
@@ -47,6 +48,7 @@ namespace ProjetoAspNetCore.Mvc
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseMigrationsEndPoint();
             }
             else
             {
