@@ -12,6 +12,8 @@ namespace ProjetoAspNetCore.Mvc.Configuration
             services.AddDbContext<CursoDbContext>(options =>
                         options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddDatabaseDeveloperPageExceptionFilter();
+
             return services;
         }
     }
