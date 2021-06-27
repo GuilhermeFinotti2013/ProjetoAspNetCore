@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjetoAspNetCore.Repository.Base
+namespace ProjetoAspNetCore.Data.Repository.Base
 {
     public abstract class RepositoryGeneric<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, new()
     {

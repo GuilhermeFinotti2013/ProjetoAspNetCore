@@ -36,11 +36,6 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         // GET: Paciente/Details/5
         public async Task<IActionResult> Details(Guid id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var paciente = await _repositorioPaciente.ObterPacienteComEstadoPaciente(id);
             if (paciente == null)
             {
@@ -108,11 +103,6 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         // GET: Paciente/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
-            if (id.Value == null)
-            {
-                return NotFound();
-            }
-
             var paciente = await _repositorioPaciente.SelecionarPorId(id.Value); 
             if (paciente == null)
             {
@@ -162,11 +152,6 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         // GET: Paciente/Delete/5
         public async Task<IActionResult> Delete(Guid id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var paciente = await _repositorioPaciente.ObterPacienteComEstadoPaciente(id);
             if (paciente == null)
             {

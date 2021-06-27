@@ -10,7 +10,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProjetoAspNetCore.Data\ProjetoAspNetCore.Data.csproj" />
-    <ProjectReference Include="..\ProjetoAspNetCore.Repository\ProjetoAspNetCore.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>

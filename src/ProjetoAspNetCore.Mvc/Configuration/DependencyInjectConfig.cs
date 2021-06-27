@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProjetoAspNetCore.Aplicacao.Repository;
 using ProjetoAspNetCore.CrossCutting.Helpers;
+using ProjetoAspNetCore.Data.Repository;
 using ProjetoAspNetCore.Domain.Interfaces;
 using ProjetoAspNetCore.Domain.Interfaces.Repository;
 using ProjetoAspNetCore.Mvc.Extensions.Identity;
@@ -26,7 +26,7 @@ namespace ProjetoAspNetCore.Mvc.Configuration
             services.AddTransient<IEmailSender, EmailSender>();
 
             #region Repositórios
-            services.AddScoped<PacienteRepository, PacienteRepository>();
+            services.AddScoped<IPacienteRepository, PacienteRepository>();
             #endregion
 
             services.AddTransient<IUnitOfUpload, UnitOfUpload>();

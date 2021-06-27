@@ -2,18 +2,16 @@
 using ProjetoAspNetCore.Data.ORM;
 using ProjetoAspNetCore.Domain.Interfaces.Repository;
 using ProjetoAspNetCore.Domain.Models;
-using ProjetoAspNetCore.Repository.Base;
+using ProjetoAspNetCore.Data.Repository.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjetoAspNetCore.Aplicacao.Repository
+namespace ProjetoAspNetCore.Data.Repository
 {
     public class PacienteRepository : RepositoryGeneric<Paciente, Guid>, IPacienteRepository
     {
-        private readonly CursoDbContext _context;
-
         public PacienteRepository(CursoDbContext context) : base(context)
         {
             _context = context;
