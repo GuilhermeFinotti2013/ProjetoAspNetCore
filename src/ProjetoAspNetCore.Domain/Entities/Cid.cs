@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace ProjetoAspNetCore.Domain.Models
+namespace ProjetoAspNetCore.Domain.Entities
 {
     public class Cid : EntityBase
     {

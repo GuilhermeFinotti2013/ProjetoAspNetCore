@@ -78,7 +78,7 @@ namespace ProjetoAspNetCore.Mvc.Extensions.TagHelpers
             TOConfiguracaoCampo configuracaoCampo = null;
             foreach (PropertyInfo propriedade in listaDePropriedades)
             {
-                if (!propriedade.Name.Equals("Id") || propriedade.PropertyType.FullName.Contains("ProjetoAspNetCore.Domain.Models."))
+                if (!propriedade.Name.Equals("Id") || propriedade.PropertyType.FullName.Contains("ProjetoAspNetCore.Domain.Entities."))
                 {
                     configuracaoCampo = VerificarComplexidadeDoCampo(propriedade.Name);
                     if (configuracaoCampo != null)

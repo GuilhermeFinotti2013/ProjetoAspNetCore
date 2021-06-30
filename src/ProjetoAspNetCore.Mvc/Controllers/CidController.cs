@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using ProjetoAspNetCore.Aplicacao.Extensions;
-using ProjetoAspNetCore.Domain.Models;
+using ProjetoAspNetCore.Domain.Entities;
 using ProjetoAspNetCore.Data.ORM;
 using System.Text;
 using X.PagedList;

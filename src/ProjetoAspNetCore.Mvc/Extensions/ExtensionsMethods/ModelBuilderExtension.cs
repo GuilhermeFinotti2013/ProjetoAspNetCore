@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using ProjetoAspNetCore.Domain.Models;
+using ProjetoAspNetCore.Domain.Entities;
 using ProjetoAspNetCore.Mvc.Extensions.Identity;
 using System;
 using System.Collections.Generic;

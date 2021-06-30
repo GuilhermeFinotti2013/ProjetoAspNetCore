@@ -19,7 +19,7 @@ namespace ProjetoAspNetCore.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ProjetoAspNetCore.Domain.Models.Cid", b =>
+            modelBuilder.Entity("ProjetoAspNetCore.Domain.Entities.Cid", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace ProjetoAspNetCore.Data.Migrations
                     b.ToTable("Cid");
                 });
 
-            modelBuilder.Entity("ProjetoAspNetCore.Domain.Models.EstadoPaciente", b =>
+            modelBuilder.Entity("ProjetoAspNetCore.Domain.Entities.EstadoPaciente", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,7 +63,7 @@ namespace ProjetoAspNetCore.Data.Migrations
                     b.ToTable("EstadoPaciente");
                 });
 
-            modelBuilder.Entity("ProjetoAspNetCore.Domain.Models.Generico", b =>
+            modelBuilder.Entity("ProjetoAspNetCore.Domain.Entities.Generico", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -80,7 +80,7 @@ namespace ProjetoAspNetCore.Data.Migrations
                     b.ToTable("Generico");
                 });
 
-            modelBuilder.Entity("ProjetoAspNetCore.Domain.Models.Medicamento", b =>
+            modelBuilder.Entity("ProjetoAspNetCore.Domain.Entities.Medicamento", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -109,7 +109,7 @@ namespace ProjetoAspNetCore.Data.Migrations
                     b.ToTable("Medicamento");
                 });
 
-            modelBuilder.Entity("ProjetoAspNetCore.Domain.Models.Paciente", b =>
+            modelBuilder.Entity("ProjetoAspNetCore.Domain.Entities.Paciente", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -164,9 +164,9 @@ namespace ProjetoAspNetCore.Data.Migrations
                     b.ToTable("Paciente");
                 });
 
-            modelBuilder.Entity("ProjetoAspNetCore.Domain.Models.Paciente", b =>
+            modelBuilder.Entity("ProjetoAspNetCore.Domain.Entities.Paciente", b =>
                 {
-                    b.HasOne("ProjetoAspNetCore.Domain.Models.EstadoPaciente", "EstadoPaciente")
+                    b.HasOne("ProjetoAspNetCore.Domain.Entities.EstadoPaciente", "EstadoPaciente")
                         .WithMany("Paciente")
                         .HasForeignKey("EstadoPacienteId")
                         .IsRequired();

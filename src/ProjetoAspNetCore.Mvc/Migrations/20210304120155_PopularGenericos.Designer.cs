@@ -172,7 +172,7 @@ namespace ProjetoAspNetCore.Mvc.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ProjetoAspNetCore.Domain.Models.Generico", b =>
+            modelBuilder.Entity("ProjetoAspNetCore.Domain.Entities.Generico", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

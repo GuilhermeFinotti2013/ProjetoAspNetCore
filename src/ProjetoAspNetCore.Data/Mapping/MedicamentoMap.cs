@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ProjetoAspNetCore.Domain.Models;
+using ProjetoAspNetCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;

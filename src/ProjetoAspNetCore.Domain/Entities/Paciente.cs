@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations.Schema;
-using ProjetoAspNetCore.Domain.Models;
+using ProjetoAspNetCore.Domain.Entities;
 
 namespace ProjetoAspNetCore.Domain.Entities
 {

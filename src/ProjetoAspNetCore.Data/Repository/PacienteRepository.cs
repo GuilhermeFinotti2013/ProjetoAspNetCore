@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjetoAspNetCore.Data.ORM;
 using ProjetoAspNetCore.Domain.Interfaces.Repository;
-using ProjetoAspNetCore.Domain.Models;
+using ProjetoAspNetCore.Domain.Entities;
 using ProjetoAspNetCore.Data.Repository.Base;
 using System;
 using System.Collections.Generic;

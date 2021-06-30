@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ProjetoAspNetCore.Domain.Entities;
 
-namespace ProjetoAspNetCore.Domain.Models
+namespace ProjetoAspNetCore.Domain.Entities
 {
     public class Generico : EntityBase
     {

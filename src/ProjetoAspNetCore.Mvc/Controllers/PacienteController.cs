@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ProjetoAspNetCore.Domain.Models;
+using ProjetoAspNetCore.Domain.Entities;
 using ProjetoAspNetCore.Mvc.Infra.Enums;
-using ProjetoAspNetCore.Mvc.ViewModel;
+using ProjetoAspNetCore.Aplicacao.ViewModel;
 using ProjetoAspNetCore.Mvc.Infra;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,6 @@ using ProjetoAspNetCore.Mvc.Infra.TOs;
 using ProjetoAspNetCore.Domain.Interfaces.Repository;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using ProjetoAspNetCore.Domain.Entities;
 
 namespace ProjetoAspNetCore.Mvc.Controllers
 {
@@ -207,7 +206,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
                 viewModel.Email = paciente.Email;
                 viewModel.Sexo = paciente.Sexo;
                 viewModel.TipoPaciente = paciente.TipoPaciente;
-                viewModel.EstdoPaciente = paciente.EstadoPaciente.Descricao;
+                viewModel.EstadoPaciente = paciente.EstadoPaciente;
                 viewModel.Ativo = paciente.Ativo;
                 lista.Add(viewModel);
             }

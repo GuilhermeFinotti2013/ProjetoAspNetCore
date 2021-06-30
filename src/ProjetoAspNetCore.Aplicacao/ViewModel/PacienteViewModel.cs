@@ -1,5 +1,5 @@
 ﻿using ProjetoAspNetCore.Domain.Enums;
-using ProjetoAspNetCore.Domain.Models;
+using ProjetoAspNetCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjetoAspNetCore.Aplicacao.ViewModels
+namespace ProjetoAspNetCore.Aplicacao.ViewModel
 {
     public class PacienteViewModel
     {

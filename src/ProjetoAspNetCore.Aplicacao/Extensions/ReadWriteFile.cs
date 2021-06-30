@@ -1,5 +1,5 @@
 ﻿using ProjetoAspNetCore.Data.ORM;
-using ProjetoAspNetCore.Domain.Models;
+using ProjetoAspNetCore.Domain.Entities;
 using System;
 using System.IO;
 using System.Linq;

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetoAspNetCore.Aplicacao.Extensions;
 using ProjetoAspNetCore.Data.ORM;
-using ProjetoAspNetCore.Domain.Models;
+using ProjetoAspNetCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
