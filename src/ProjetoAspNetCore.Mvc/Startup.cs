@@ -15,6 +15,7 @@ using ProjetoAspNetCore.Mvc.Identity.Services;
 using System;
 using System.Diagnostics;
 using System.Text;
+using ProjetoAspNetCore.Aplicacao.AutoMapper;
 
 namespace ProjetoAspNetCore.Mvc
 {
@@ -30,7 +31,7 @@ namespace ProjetoAspNetCore.Mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddAutoMapper(typeof(AutoMapperConfig));
             #region Utilizado métodos de extensão de IServiceCollection;
             services.AddDbContextConfig(Configuration);
             services.AddIdentityConfig(Configuration);
