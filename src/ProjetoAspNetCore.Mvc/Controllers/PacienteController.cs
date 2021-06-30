@@ -13,6 +13,7 @@ using ProjetoAspNetCore.Mvc.Infra.TOs;
 using ProjetoAspNetCore.Domain.Interfaces.Repository;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using ProjetoAspNetCore.Domain.Entities;
 
 namespace ProjetoAspNetCore.Mvc.Controllers
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ProjetoAspNetCore.Domain.Models;
+using ProjetoAspNetCore.Domain.Entities;
 
 namespace ProjetoAspNetCore.Data.Mapping
 {
