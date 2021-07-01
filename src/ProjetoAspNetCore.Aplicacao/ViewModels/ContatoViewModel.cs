@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjetoAspNetCore.Aplicacao.ViewModel
+namespace ProjetoAspNetCore.Aplicacao.ViewModels
 {
     public class ContatoViewModel
     {

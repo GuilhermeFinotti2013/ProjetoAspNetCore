@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjetoAspNetCore.Aplicacao.ViewModel
+namespace ProjetoAspNetCore.Aplicacao.ViewModels
 {
     public class PacienteViewModel
     {

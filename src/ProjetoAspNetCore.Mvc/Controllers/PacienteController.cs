@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjetoAspNetCore.Domain.Entities;
 using ProjetoAspNetCore.Mvc.Infra.Enums;
-using ProjetoAspNetCore.Aplicacao.ViewModel;
+using ProjetoAspNetCore.Aplicacao.ViewModels;
 using ProjetoAspNetCore.Mvc.Infra;
 using System;
 using System.Collections.Generic;

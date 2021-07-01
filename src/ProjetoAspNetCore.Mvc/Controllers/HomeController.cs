@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ProjetoAspNetCore.Aplicacao.ViewModel;
+using ProjetoAspNetCore.Aplicacao.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
