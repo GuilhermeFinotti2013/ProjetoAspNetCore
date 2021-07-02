@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using ProjetoAspNetCore.Domain.Entities;
-using ProjetoAspNetCore.Domain.Entities;
 using System.Linq;
 
 namespace ProjetoAspNetCore.Data.ORM

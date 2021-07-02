@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using ProjetoAspNetCore.Domain.Entities;
-using ProjetoAspNetCore.Domain.Entities;
 using ProjetoAspNetCore.DomainCore.Base;
 
 namespace ProjetoAspNetCore.Domain.Interfaces.Repository
