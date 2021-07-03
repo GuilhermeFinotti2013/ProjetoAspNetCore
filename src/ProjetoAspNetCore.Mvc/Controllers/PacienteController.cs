@@ -13,24 +13,26 @@ using ProjetoAspNetCore.Mvc.Infra.TOs;
 using ProjetoAspNetCore.Domain.Interfaces.Repository;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using ProjetoAspNetCore.Aplicacao.Interfaces;
 
 namespace ProjetoAspNetCore.Mvc.Controllers
 {
     //    [Authorize(Roles = "Admin")]
     public class PacienteController : Controller
     {
+        private readonly IServicoAplicacaoPaciente _serviceApp;
         private readonly IPacienteRepository _repositorioPaciente;
 
-        public PacienteController(IPacienteRepository repositorioPaciente)
+        public PacienteController(IPacienteRepository repositorioPaciente, IServicoAplicacaoPaciente serviceApp)
         {
             _repositorioPaciente = repositorioPaciente;
+            _serviceApp = serviceApp;
         }
 
         // GET: Paciente
         public async Task<IActionResult> Index()
         {
-            var dados = await _repositorioPaciente.ListarPacientesComEstado();
-            return View(ConverterParaViewModels(dados.ToList()));
+            return View(await _serviceApp.ObterPacientesComEstadoPacienteApp());
         }
 
         // GET: Paciente/Details/5
@@ -192,27 +194,6 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         }
 
         #region Métodos auxiliares
-        private List<PacienteViewModel> ConverterParaViewModels(List<Paciente> registros)
-        {
-            List<PacienteViewModel> lista = new List<PacienteViewModel>();
-            PacienteViewModel viewModel;
-            foreach (Paciente paciente in registros)
-            {
-                viewModel = new PacienteViewModel();
-                viewModel.Id = paciente.Id;
-                viewModel.Nome = paciente.Nome;
-                viewModel.DataNascimento = paciente.DataNascimento;
-                viewModel.DataInternacao = paciente.DataInternacao;
-                viewModel.Email = paciente.Email;
-                viewModel.Sexo = paciente.Sexo;
-                viewModel.TipoPaciente = paciente.TipoPaciente;
-                viewModel.EstadoPaciente = paciente.EstadoPaciente;
-                viewModel.Ativo = paciente.Ativo;
-                lista.Add(viewModel);
-            }
-            return lista;
-        }
-
         private List<TOSelectItem> EstadoPacientesParaSelectItens(List<EstadoPaciente> registros)
         {
             List<TOSelectItem> lista = new List<TOSelectItem>();

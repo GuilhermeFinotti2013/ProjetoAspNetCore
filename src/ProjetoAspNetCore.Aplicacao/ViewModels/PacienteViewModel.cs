@@ -61,5 +61,7 @@ namespace ProjetoAspNetCore.Aplicacao.ViewModels
         public string RgOrgao { get; set; }
         [Display(Name = "Data da emissão")]
         public DateTime RgDataEmissao { get; set; }
+        [MaxLength(90, ErrorMessage = "O campo {0} deve ter, no máximo, {1} caracteres")]
+        public string Motivo { get; set; }
     }
 }

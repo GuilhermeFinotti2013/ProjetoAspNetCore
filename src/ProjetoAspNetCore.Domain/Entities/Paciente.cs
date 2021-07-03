@@ -28,5 +28,6 @@ namespace ProjetoAspNetCore.Domain.Entities
         public string Rg { get; set; }
         public string RgOrgao { get; set; }
         public DateTime RgDataEmissao { get; set; }
+        public string Motivo { get; set; }
     }
 }

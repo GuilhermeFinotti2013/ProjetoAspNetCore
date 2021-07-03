@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ProjetoAspNetCore.Aplicacao.Interfaces;
+using ProjetoAspNetCore.Aplicacao.Services;
 using ProjetoAspNetCore.CrossCutting.Helpers;
 using ProjetoAspNetCore.Data.Repository;
 using ProjetoAspNetCore.Domain.Interfaces;
@@ -20,6 +22,19 @@ namespace ProjetoAspNetCore.Mvc.Configuration
     {
         public static IServiceCollection AddDependencyInjectConfig(this IServiceCollection services, IConfiguration configuration)
         {
+            #region Aplicação
+            services.AddScoped<IServicoAplicacaoPaciente, ServicoAplicacaoPaciente>();
+            #endregion
+
+            #region Domain -> Service
+
+            #endregion
+
+            #region Domain -> Repository
+
+            #endregion
+
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped((context) => Logger.Factory.Get());
              //         services.AddScoped<AuditoriaFilter>();
