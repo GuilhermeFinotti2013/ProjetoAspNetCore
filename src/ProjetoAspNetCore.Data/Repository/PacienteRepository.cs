@@ -17,9 +17,9 @@ namespace ProjetoAspNetCore.Data.Repository
             _context = context;
         }
 
-        public List<EstadoPaciente> ListarEstadosPaciente()
+        public async Task<List<EstadoPaciente>> ListarEstadosPaciente()
         {
-            return _context.EstadoPaciente.AsNoTracking().ToListAsync().Result;
+            return await _context.EstadoPaciente.AsNoTracking().ToListAsync();
         }
 
         public async Task<IEnumerable<Paciente>> ListarPacientes()

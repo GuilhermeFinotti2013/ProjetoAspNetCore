@@ -20,13 +20,13 @@ namespace ProjetoAspNetCore.Mvc.Controllers
     //    [Authorize(Roles = "Admin")]
     public class PacienteController : Controller
     {
-        private readonly IServicoAplicacaoPaciente _serviceApp;
         private readonly IPacienteRepository _repositorioPaciente;
+        private readonly IServicoAplicacaoPaciente _serviceApp;
 
-        public PacienteController(IPacienteRepository repositorioPaciente, IServicoAplicacaoPaciente serviceApp)
+        public PacienteController(IServicoAplicacaoPaciente serviceApp, IPacienteRepository repositorioPaciente)
         {
-            _repositorioPaciente = repositorioPaciente;
             _serviceApp = serviceApp;
+            _repositorioPaciente = repositorioPaciente;
         }
 
         // GET: Paciente
@@ -38,7 +38,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         // GET: Paciente/Details/5
         public async Task<IActionResult> Details(Guid id)
         {
-            var paciente = await _repositorioPaciente.ObterPacienteComEstadoPaciente(id);
+            var paciente = await _serviceApp.ObterPacienteComEstadoPacienteApp(id);
             if (paciente == null)
             {
                 return NotFound();
@@ -48,7 +48,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
         }
 
         // GET: Paciente/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             TOConfiguracaoFormulario configuracaoFormulario = new TOConfiguracaoFormulario();
             configuracaoFormulario.Titulo = "Adicionar novo paciente";
@@ -61,7 +61,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
             configuracaoFormulario.ConfiguracaoCampos.Add(new TOConfiguracaoCampo("TipoPaciente", TipoCampo.Combo,
                             ConversorDeEnuns.EnumParaSelectItem(TipoEnunsConvertiveis.TipoPaciente)));
             configuracaoFormulario.ConfiguracaoCampos.Add(new TOConfiguracaoCampo("EstadoPacienteId", TipoCampo.Combo,
-                            EstadoPacientesParaSelectItens(_repositorioPaciente.ListarEstadosPaciente())));
+                            EstadoPacientesParaSelectItens(await _serviceApp.ListarEstadoPacienteApp())));
             configuracaoFormulario.TamalhoLabel = 3;
 
             return View(configuracaoFormulario);
@@ -110,7 +110,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
             {
                 return NotFound();
             }
-            ViewBag.EstadoPaciente = new SelectList(_repositorioPaciente.ListarEstadosPaciente(), "Id", "Descricao",
+            ViewBag.EstadoPaciente = new SelectList(await _serviceApp.ListarEstadoPacienteApp(), "Id", "Descricao",
                 paciente.EstadoPacienteId);
             return View(paciente);
         }
@@ -146,7 +146,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.EstadoPaciente = new SelectList(_repositorioPaciente.ListarEstadosPaciente(), "Id", "Descricao",
+            ViewBag.EstadoPaciente = new SelectList(await _serviceApp.ListarEstadoPacienteApp(), "Id", "Descricao",
                 paciente.EstadoPacienteId);
             return View(paciente);
         }
@@ -173,14 +173,9 @@ namespace ProjetoAspNetCore.Mvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> ReportForEstadoPaciente(Guid? id)
+        public async Task<IActionResult> ReportForEstadoPaciente(Guid id)
         {
-            if (id.Value == null)
-            {
-                return NotFound();
-            }
-
-            var pacientesPorEstado = await _repositorioPaciente.ObterPacientesPorEstadoPaciente(id.Value);
+            var pacientesPorEstado = await _repositorioPaciente.ObterPacientesPorEstadoPaciente(id);
             if (pacientesPorEstado == null)
             {
                 return NotFound();
@@ -190,7 +185,7 @@ namespace ProjetoAspNetCore.Mvc.Controllers
 
         private bool PacienteExists(Guid id)
         {
-            return _repositorioPaciente.TemPaciente(id);
+            return _serviceApp.TemPaciente(id);
         }
 
         #region Métodos auxiliares
